@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 export const StyledAfterLoginLayout = styled.div`
 display: flex;
 align-items: stretch;
-background-color: #fff;
 color: #000;
 
 .leftSectionWrapper {
@@ -88,12 +87,15 @@ width: 100%;
     width: 990px;
     display: flex;
     justify-content: space-between;
+
+
+    > main {
+        width: 100%;
+        /* width: 600px; */
+        height: 200dvh;
+    }
 }
 
-.main {
-    width: 600px;
-    height: 200dvh;
-}
 
 .rightSection {
     width: 350px;
@@ -129,14 +131,15 @@ width: 100%;
 }
 
 .followRecommend {
-    font-size: 20px;
-    font-weight: bold;
-    background-color: rgb(247, 249, 249);
-    border-radius: 16px;
     margin: 12px 0;
     padding: 12px 16px;
-}
-.followRecommend h3 {
-    padding-bottom: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 16px;
+    width: inherit;
+    
+    h3 {
+        padding-bottom: 12px;
+    }
 }
 `;

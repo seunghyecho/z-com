@@ -9,6 +9,8 @@ import { StyledAfterLoginLayout } from "./layout.style";
 
 import NavMenu from "./_component/NavMenu";
 import LogoutButton from "./_component/LogoutButton";
+import TrendSection from "./_component/TrendSection";
+import FollowRecommend from "./_component/FollowRecommend";
 
 interface AfterLoginLayoutProps {
   children: React.ReactNode;
@@ -23,9 +25,7 @@ export default function AfterLoginLayout({ children }: AfterLoginLayoutProps) {
             {/* logo */}
 
             <Link className="logo" href="home">
-              <div className="logoPill">
-                <IoLogoSnapchat size={50} />
-              </div>
+              <div className="logoPill"></div>
             </Link>
 
             {/* Nav Menu */}
@@ -40,11 +40,7 @@ export default function AfterLoginLayout({ children }: AfterLoginLayoutProps) {
               </Link>
 
               <div className="logoutButton">
-                <LogoutButton
-                  onLogout={(e: any) => {
-                    console.log(e);
-                  }}
-                />
+                <LogoutButton />
               </div>
             </nav>
           </div>
@@ -56,9 +52,15 @@ export default function AfterLoginLayout({ children }: AfterLoginLayoutProps) {
           <section className="rightSection">
             <form action="" className="search">
               <CgSearchLoading size={25} />
-
               <input type="search" />
             </form>
+
+            <TrendSection />
+
+            <div className="followRecommend">
+              <h3>Follow Recommend</h3>
+              <FollowRecommend />
+            </div>
           </section>
         </div>
       </div>

@@ -2,16 +2,16 @@
 
 import { StyledLogoutButton } from "./LogoutButton.style";
 
-interface LogoutButtonProps {
-  me?: any;
-  onLogout: any;
-}
-export default function LogoutButton({ onLogout }: LogoutButtonProps) {
-  const me = {
-    id: "shcho",
-    nickname: "shcho",
-    image: "",
-  };
+interface LogoutButtonProps {}
+
+export const me = {
+  id: "shcho",
+  nickname: "shcho",
+  image: "",
+};
+export default function LogoutButton({}: LogoutButtonProps) {
+  const onLogout = () => {};
+
   return (
     <StyledLogoutButton className="logoutButton" onClick={onLogout}>
       <div className="logoutUserImage">

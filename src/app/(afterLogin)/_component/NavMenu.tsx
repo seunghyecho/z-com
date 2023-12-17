@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
+import {
+  useSelectedLayoutSegment,
+  useSelectedLayoutSegments,
+} from "next/navigation";
 import { TbHome } from "react-icons/tb";
 import { TbMoodSearch } from "react-icons/tb";
 import { PiEnvelopeSimpleDuotone } from "react-icons/pi";
@@ -9,28 +12,24 @@ import { CgProfile } from "react-icons/cg";
 
 import { StyledNavMenu } from "./NavMenu.style";
 
+export const me = {
+  id: "shcho",
+  nickname: "shcho",
+  image: "",
+};
 export default function NavMenu() {
-  const segment = useSelectedLayoutSegment();
-  const me = {
-    id: "shcho",
-    nickname: "shcho",
-    image: "",
-  };
+  const segment = useSelectedLayoutSegment(); //compose
+  const segments = useSelectedLayoutSegments(); //compose/twwet
+
   return (
     <StyledNavMenu>
       <li>
         <Link href="/home">
           <div className="navPill">
             <TbHome size={20} />
-            {segment === "home" ? (
-              <>
-                <div style={{ fontWeight: "bold" }}>Home</div>
-              </>
-            ) : (
-              <>
-                <div style={{ fontWeight: "light" }}>Home</div>
-              </>
-            )}
+            <div style={{ fontWeight: `${segment === "home" ? 600 : 400}` }}>
+              Home
+            </div>
           </div>
         </Link>
       </li>
@@ -39,15 +38,9 @@ export default function NavMenu() {
         <Link href="/explore">
           <div className="navPill">
             <TbMoodSearch size={20} />
-            {segment === "explore" ? (
-              <>
-                <div style={{ fontWeight: "bold" }}>Explore</div>
-              </>
-            ) : (
-              <>
-                <div style={{ fontWeight: "light" }}>Explore</div>
-              </>
-            )}
+            <div style={{ fontWeight: `${segment === "explore" ? 600 : 400}` }}>
+              Explore
+            </div>
           </div>
         </Link>
       </li>
@@ -56,15 +49,11 @@ export default function NavMenu() {
         <Link href="/messages">
           <div className="navPill">
             <PiEnvelopeSimpleDuotone size={20} />
-            {segment === "messages" ? (
-              <>
-                <div style={{ fontWeight: "bold" }}>Messages</div>
-              </>
-            ) : (
-              <>
-                <div style={{ fontWeight: "light" }}>Messages</div>
-              </>
-            )}
+            <div
+              style={{ fontWeight: `${segment === "messages" ? 600 : 400}` }}
+            >
+              Messages
+            </div>
           </div>
         </Link>
       </li>
@@ -73,16 +62,9 @@ export default function NavMenu() {
         <Link href="/search">
           <div className="navPill">
             <CgProfile size={20} />
-
-            {segment === "search" ? (
-              <>
-                <div style={{ fontWeight: "bold" }}>Search</div>
-              </>
-            ) : (
-              <>
-                <div style={{ fontWeight: "light" }}>Search</div>
-              </>
-            )}
+            <div style={{ fontWeight: `${segment === "search" ? 600 : 400}` }}>
+              Search
+            </div>
           </div>
         </Link>
       </li>
