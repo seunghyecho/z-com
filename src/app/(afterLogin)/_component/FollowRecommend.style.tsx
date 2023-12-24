@@ -11,12 +11,14 @@ export const StyledFollowRecommend = styled.div`
     width: 100%;
     text-align: left;
     color:  #2a68a6f3;
+
+    &:hover {
+        background-color: rgba(15,20,25, 0.1);
+        border-radius: 29px;
+    }
     }
 
-&:hover {
-    background-color: rgba(15,20,25, 0.1);
-    border-radius: 29px;
-}
+
 
 .userLogoSection {
     display: flex;
@@ -37,7 +39,7 @@ export const StyledFollowRecommend = styled.div`
 }
 .followButtonSection {
     button{
-        font-size: 12px;
+        font-size: 10px;
         padding: 10px;
         width: auto;
         border: none;
@@ -46,7 +48,7 @@ export const StyledFollowRecommend = styled.div`
         width: auto;
         border-radius: 6px;
         color:#fff;
-        background-color: #2a68a6f3;
+        background-color:rgb(127, 196, 243);
     }
 }
 

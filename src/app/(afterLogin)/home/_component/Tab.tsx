@@ -3,6 +3,12 @@
 import { useState } from "react";
 import { StyledTab } from "./Tab.style";
 
+export const me = {
+  id: "shcho",
+  nickname: "shcho",
+  image: "",
+};
+
 export default function Tab() {
   const [tab, setTab] = useState("recommend");
   const onClickRecommend = () => {

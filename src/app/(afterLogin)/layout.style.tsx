@@ -17,6 +17,7 @@ color: #000;
 }
 
 .leftSectionFixed {
+    padding-right: 30px;
     position: fixed;
     width: inherit;
     height: 100dvh;
@@ -84,20 +85,19 @@ width: 100%;
 
 .rightSectionInner {
     height: 100%;
-    width: 990px;
     display: flex;
     justify-content: space-between;
 
 
     > main {
-        width: 100%;
-        /* width: 600px; */
+       
         height: 200dvh;
     }
 }
 
 
 .rightSection {
+    padding-left: 30px;
     width: 350px;
     height: 100%;
 }
@@ -135,8 +135,10 @@ width: 100%;
     padding: 12px 16px;
     font-size: 15px;
     font-weight: 600;
-    border-radius: 16px;
+    border-radius: 6px;
     width: inherit;
+
+    background: #fff;
     
     h3 {
         padding-bottom: 12px;

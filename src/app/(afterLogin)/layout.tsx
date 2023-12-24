@@ -20,29 +20,31 @@ export default function AfterLoginLayout({ children }: AfterLoginLayoutProps) {
   return (
     <StyledAfterLoginLayout>
       <header className="leftSectionWrapper">
-        <section className="leftSectionWrapper">
-          <div className="leftSectionFixed">
-            {/* logo */}
+        <section className="leftSection">
+          <div className="leftSectionWrapper">
+            <div className="leftSectionFixed">
+              {/* logo */}
 
-            <Link className="logo" href="home">
-              <div className="logoPill"></div>
-            </Link>
-
-            {/* Nav Menu */}
-
-            <nav>
-              <NavMenu />
-
-              {/* Post */}
-
-              <Link href="/compose/tweet" className="postButton">
-                Post
+              <Link className="logo" href="home">
+                <div className="logoPill"></div>
               </Link>
 
-              <div className="logoutButton">
-                <LogoutButton />
-              </div>
-            </nav>
+              {/* Nav Menu */}
+
+              <nav>
+                <NavMenu />
+
+                {/* Post */}
+
+                <Link href="/compose/tweet" className="postButton">
+                  Post
+                </Link>
+
+                <div className="logoutButton">
+                  <LogoutButton />
+                </div>
+              </nav>
+            </div>
           </div>
         </section>
       </header>

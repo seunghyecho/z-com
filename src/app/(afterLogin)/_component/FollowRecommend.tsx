@@ -45,7 +45,7 @@ export default function FollowRecommend() {
               </div>
             </div>
             <div className="followButtonSection">
-              <button onClick={onFollow}>FOLLOW</button>
+              <button onClick={onFollow}>Follow</button>
             </div>
           </div>
         );
