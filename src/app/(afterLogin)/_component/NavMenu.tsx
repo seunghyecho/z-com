@@ -55,11 +55,11 @@ export default function NavMenu() {
       </li>
 
       <li>
-        <Link href="/search">
+        <Link href={`/${me.id}`}>
           <div className="navPill">
             <CgProfile size={20} />
-            <div style={{ fontWeight: `${segment === "search" ? 600 : 400}` }}>
-              Search
+            <div style={{ fontWeight: `${segment === me.id ? 600 : 400}` }}>
+              Profile
             </div>
           </div>
         </Link>

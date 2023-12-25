@@ -8,7 +8,7 @@ export const StyledPost = styled.article`
     vertical-align: middle;
     margin: 0 3px;
 }
-.post {
+&.post {
     display: flex;
     flex-direction: column;
     padding: 12px 16px;
@@ -19,7 +19,7 @@ export const StyledPost = styled.article`
     transition-duration: 0.2s;
     cursor: pointer;
 }
-.post:hover {
+&.post:hover {
     background-color: rgba(0, 0, 0, 0.03);
 }
 

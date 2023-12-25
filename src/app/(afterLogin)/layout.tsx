@@ -2,15 +2,15 @@
 
 import React from "react";
 import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
+
+import NavMenu from "@/app/(afterLogin)/_component/NavMenu";
+import LogoutButton from "@/app/(afterLogin)/_component/LogoutButton";
+import TrendSection from "@/app/(afterLogin)/_component/TrendSection";
+import FollowRecommend from "@/app/(afterLogin)/_component/FollowRecommend";
+import RightSearchZone from "@/app/(afterLogin)/_component/RightSearchZone";
 
 import { StyledAfterLoginLayout } from "./layout.style";
-
-import NavMenu from "./_component/NavMenu";
-import LogoutButton from "./_component/LogoutButton";
-import TrendSection from "./_component/TrendSection";
-import FollowRecommend from "./_component/FollowRecommend";
-import RightSearchZone from "./_component/RightSearchZone";
-
 interface AfterLoginLayoutProps {
   children: React.ReactNode;
   modal: React.ReactNode;
@@ -20,6 +20,8 @@ export default function AfterLoginLayout({
   children,
   modal,
 }: AfterLoginLayoutProps) {
+  const segment = useSelectedLayoutSegment();
+
   return (
     <StyledAfterLoginLayout className="container">
       <header className="leftSectionWrapper">

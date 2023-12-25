@@ -90,7 +90,7 @@ width: 100%;
 
 
     > main {
-       
+       min-width: 600px;
         height: 200dvh;
     }
 }

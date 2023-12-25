@@ -1,8 +1,9 @@
+"use client";
+
 import { usePathname } from "next/navigation";
+import SearchForm from "@/app/(afterLogin)/_component/SearchForm";
 
 import { StyledRightSearchZone } from "./RightSearchZone.style";
-
-import SearchForm from "@/app/(afterLogin)/_component/SearchForm";
 export default function RightSearchZone() {
   const pathname = usePathname();
   const onChangeAll = () => {};
@@ -13,7 +14,7 @@ export default function RightSearchZone() {
   }
   if (pathname === "/search") {
     return (
-      <div>
+      <StyledRightSearchZone>
         <h5 className="filterTitle">검색 필터</h5>
         <div className={"filterSection"}>
           <div>
@@ -38,7 +39,7 @@ export default function RightSearchZone() {
             </div>
           </div>
         </div>
-      </div>
+      </StyledRightSearchZone>
     );
   }
   return (
