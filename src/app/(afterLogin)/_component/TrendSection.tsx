@@ -26,10 +26,10 @@ export default function TrendSection() {
       {/* 실시간 트렌드 */}
       <div className="trend">
         <h3>Trend</h3>
-        {trendList?.map((item) => {
+        {trendList?.map((item, idx) => {
           const { post, title, count } = item;
 
-          return <Trend post={post} title={title} count={count} />;
+          return <Trend key={idx} post={post} title={title} count={count} />;
         })}
       </div>
     </StyledTrendSection>

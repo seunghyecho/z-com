@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import dayjs from "dayjs";
 
@@ -7,6 +9,7 @@ import ActionButton from "./ActionButton";
 
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko"; // 한국어 가져오기
+import Image from "next/image";
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
@@ -26,7 +29,7 @@ export default function Post() {
       <div className="postWrapper">
         <div className="postUserSection">
           <Link href={target.User.id} className="postUserImage">
-            <img src={target.User.image} alt={target.User.nickname} />
+            <Image src={target.User.image} alt={target.User.nickname} />
           </Link>
           <div className="postShade" />
         </div>
@@ -45,9 +48,9 @@ export default function Post() {
           <div className="postImageSection">
             {target.Images.length > 0 && (
               <div className="postImageSection">
-                {target.Images.map((item) => {
+                {target.Images.map((item, idx) => {
                   if (!item) return;
-                  return <img src={item?.link} alt="" />;
+                  return <Image key={idx} src="" alt="" />;
                 })}
               </div>
             )}

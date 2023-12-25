@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import {
   StyledActionButton,
@@ -18,9 +20,7 @@ export default function ActionButton({ white }: ActionButtonProps) {
   const onClickRepost = () => {};
   const onClickHeart = () => {};
 
-  useEffect(() => {
-    console.log(commented, reposted, liked);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <StyledActionButton className="actionButtons">

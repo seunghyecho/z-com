@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { StyledFollowRecommend } from "./FollowRecommend.style";
 
@@ -32,12 +33,12 @@ export default function FollowRecommend() {
     <StyledFollowRecommend>
       {/* 팔로우 추천 */}
 
-      {followList.map((item) => {
+      {followList.map((item, idx) => {
         return (
-          <div className="container">
+          <div className="container" key={idx}>
             <div className="userLogoSection">
               <div className="userLogo">
-                <img src={item.image} alt={item.id} />
+                <Image src={item.image} alt={item.id} />
               </div>
               <div className="userInfo">
                 <div className="title">{item.id}</div>

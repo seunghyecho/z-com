@@ -11,15 +11,11 @@ import { PiEnvelopeSimpleDuotone } from "react-icons/pi";
 import { CgProfile } from "react-icons/cg";
 
 import { StyledNavMenu } from "./NavMenu.style";
+import { me } from "@/app/const/common";
 
-export const me = {
-  id: "shcho",
-  nickname: "shcho",
-  image: "",
-};
 export default function NavMenu() {
   const segment = useSelectedLayoutSegment(); //compose
-  const segments = useSelectedLayoutSegments(); //compose/twwet
+  const segments = useSelectedLayoutSegments(); //compose/tweet
 
   return (
     <StyledNavMenu>
