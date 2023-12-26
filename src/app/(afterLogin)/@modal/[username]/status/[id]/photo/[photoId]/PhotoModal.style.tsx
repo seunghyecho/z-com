@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledPhotoModal = styled.div`
 &.container {
-    background-color: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.95);
     position: fixed;
     z-index: 10;
     left: 0;
@@ -44,26 +44,5 @@ export const StyledPhotoModal = styled.div`
     background-color: white;
     border-left: 1px solid rgb(239, 243, 244);
     overflow: auto;
-}
-
-.closeButton {
-    width: 34px;
-    height: 34px;
-    border-radius: 17px;
-    border: none;
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.75);
-    position: absolute;
-    left: 16px;
-    top: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.closeButton svg {
-    fill: white;
-}
-.closeButton:hover {
-    background-color: rgba(25,25,25, 0.75);
 }
 `;

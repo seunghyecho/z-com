@@ -59,7 +59,7 @@ export default function Post({ noImage }: PostProps) {
               {target.Images && target.Images.length > 0 && (
                 <div className="postImageSection">
                   <Link
-                    href={`/${target.User.id}/${target.postId}/photo/${target.Images[0].imageId}`}
+                    href={`/${target.User.id}/status/${target.postId}/photo/${target.Images[0].imageId}`}
                     className="postImageSection"
                   >
                     <img src={target.Images[0]?.link} alt="" />

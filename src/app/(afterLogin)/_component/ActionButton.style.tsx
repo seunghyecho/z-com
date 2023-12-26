@@ -26,7 +26,7 @@ export const StyledActionButton = styled.div`
 }
 
 
-.actionButtons {
+&.actionButtons {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -34,7 +34,7 @@ export const StyledActionButton = styled.div`
     margin-top: 12px;
 }
 
-.actionButtons svg {
+&.actionButtons svg {
     fill: rgb(83, 100, 113);
 }
 

@@ -6,9 +6,10 @@ import CommentForm from "@/app/(afterLogin)/[username]/status/[id]/_component/Co
 import PhotoModalCloseButton from "./_component/PhotoModalCloseButton";
 
 import { StyledPhotoModal } from "./photoModal.style";
-import SinglePost from "@/app/(afterLogin)/[username]/status/[id]/page";
 
 export default function PhotoModal() {
+  // http://localhost:3000/shcho/status/1/photo/1
+
   return (
     <StyledPhotoModal className="container">
       <PhotoModalCloseButton />
