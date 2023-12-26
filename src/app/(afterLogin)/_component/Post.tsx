@@ -14,7 +14,10 @@ import "dayjs/locale/ko"; // 한국어 가져오기
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
-export default function Post() {
+interface PostProps {
+  noImage?: boolean;
+}
+export default function Post({ noImage }: PostProps) {
   const target = {
     postId: 1,
     User: {
@@ -27,7 +30,7 @@ export default function Post() {
     content: "이렇게 게시되는 글 입니다.",
   };
 
-  if (Math.random() > 0.5) {
+  if (Math.random() > 0.5 && !noImage) {
     target.Images.push({ imageId: 1, link: faker.image.urlLoremFlickr() });
   }
   return (

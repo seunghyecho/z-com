@@ -22,7 +22,7 @@ export default function PhotoModal() {
         </div>
       </div>
       <div className="commentZone">
-        <SinglePost />
+        <Post noImage />
         <CommentForm />
       </div>
     </StyledPhotoModal>
