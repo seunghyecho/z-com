@@ -38,7 +38,7 @@ export default function FollowRecommend() {
           <div className="container" key={idx}>
             <div className="userLogoSection">
               <div className="userLogo">
-                <Image src={item.image} alt={item.id} />
+                <img src={item.image} alt={item.id} />
               </div>
               <div className="userInfo">
                 <div className="title">{item.id}</div>

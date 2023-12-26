@@ -1,26 +1,12 @@
 import styled from "styled-components";
 
-export const StyledPost = styled.article`
+export const StyledPost = styled.div`
 .postBar{
     display: inline-block;
     font-size: 0.6rem;
     text-align: center;
     vertical-align: middle;
     margin: 0 3px;
-}
-&.post {
-    display: flex;
-    flex-direction: column;
-    padding: 12px 16px;
-    border-color: rgb(239, 243, 244);
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    transition-property: background-color, box-shadow;
-    transition-duration: 0.2s;
-    cursor: pointer;
-}
-&.post:hover {
-    background-color: rgba(0, 0, 0, 0.03);
 }
 
 .postWrapper {

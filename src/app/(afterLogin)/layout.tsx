@@ -55,7 +55,7 @@ export default function AfterLoginLayout({
       </header>
       <div className="rightSectionWrapper">
         <div className="rightSectionInner">
-          <main>{children}</main>
+          <div>{children}</div>
           <section className="rightSection">
             <RightSearchZone />
 

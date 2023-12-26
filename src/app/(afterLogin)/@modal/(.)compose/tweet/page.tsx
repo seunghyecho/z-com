@@ -35,7 +35,7 @@ export default function TweetModal() {
             <div className="modalBody">
               <div className="postUserSection">
                 <div className="postUserImage">
-                  <Image src={me.image} alt={me.nickname} />
+                  <img src={me.image} alt={me.nickname} />
                 </div>
               </div>
               <div className="inputDiv">

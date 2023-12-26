@@ -8,7 +8,7 @@ const NextThemeProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      {children}
+      <>{children}</>
     </ThemeProvider>
   );
 };

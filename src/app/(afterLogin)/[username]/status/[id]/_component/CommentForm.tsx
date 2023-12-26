@@ -1,12 +1,12 @@
 "use client";
 
-import { ChangeEventHandler, FormEventHandler, useRef, useState } from "react";
-import { StyledPostForm } from "./PostForm.style";
-import { IoMdImages } from "react-icons/io";
-import { me } from "@/app/const/common";
 import Image from "next/image";
+import { IoMdImage } from "react-icons/io";
+import { ChangeEventHandler, FormEventHandler, useRef, useState } from "react";
+import { StyledCommentForm } from "./CommentForm.style";
+import { me } from "@/app/const/common";
 
-export default function PostForm({}) {
+export default function CommentForm() {
   const imageRef = useRef<HTMLInputElement>(null); // input useRef error로 인한 타입스크립트 처리
 
   const [content, setContent] = useState("");
@@ -25,14 +25,20 @@ export default function PostForm({}) {
 
   const onClickActionButton = () => {};
   return (
-    <StyledPostForm className="postForm" onSubmit={onSubmit}>
+    <StyledCommentForm className="postForm" onSubmit={onSubmit}>
       <div className="postUserSection">
         <div className="postUserImage">
           <img src={me.image} alt={me.image} />
         </div>
       </div>
       <div className="postInputSection">
-        <textarea name="" id="" value={content} onChange={onChange}></textarea>
+        <textarea
+          name=""
+          id=""
+          value={content}
+          onChange={onChange}
+          placeholder="답글 게시하기"
+        ></textarea>
         <div className="postButtonSection">
           <div className="footerButtons">
             <div className="footerButtonLeft">
@@ -44,15 +50,19 @@ export default function PostForm({}) {
                 ref={imageRef}
               />
               <button className="uploadButton" onClick={onClickUploadButton}>
-                <IoMdImages size={20} />
+                <IoMdImage size={20} />
               </button>
             </div>
-            <button className="actionButton" onClick={onClickActionButton}>
-              게시하기
+            <button
+              className="actionButton"
+              disabled={!content}
+              onClick={onClickActionButton}
+            >
+              Comment
             </button>
           </div>
         </div>
       </div>
-    </StyledPostForm>
+    </StyledCommentForm>
   );
 }

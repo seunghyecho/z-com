@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import BackButton from "@/app/(afterLogin)/_component/BackButton";
 import Post from "@/app/(afterLogin)/_component/Post";
@@ -15,7 +13,7 @@ export default function Profile() {
       </div>
       <div className="userZone">
         <div className="userImage">
-          <Image src={me.image} alt={me.id} />
+          <img src={me.image} alt={me.id} />
         </div>
         <div className="userName">
           <div>{me.nickname}</div>

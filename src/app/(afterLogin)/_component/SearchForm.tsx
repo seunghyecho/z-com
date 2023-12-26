@@ -1,5 +1,11 @@
+"use client";
+
 import { CgSearchLoading } from "react-icons/cg";
-export default function SearchForm() {
+
+interface SearchFormProps {
+  q?: string;
+}
+export default function SearchForm({ q }: SearchFormProps) {
   return (
     <form action="" className="search">
       <CgSearchLoading size={25} />
