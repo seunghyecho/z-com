@@ -1,8 +1,8 @@
 "use client";
 
-import GlobalStyle from "./global-styles";
+import GlobalStyle from "@/styles/global-styles";
+import { theme } from "@/styles/theme";
 import { ThemeProvider } from "styled-components";
-import { theme } from "./theme";
 
 const NextThemeProvider = ({ children }: { children: React.ReactNode }) => {
   return (

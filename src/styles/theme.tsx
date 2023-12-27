@@ -1,5 +1,3 @@
-"use client";
-
 import { DefaultTheme } from "styled-components";
 
 const colors = {
