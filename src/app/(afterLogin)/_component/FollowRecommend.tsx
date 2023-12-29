@@ -4,10 +4,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { StyledFollowRecommend } from "./FollowRecommend.style";
 
+import DefaultProfile from "../../../../public/assets/images/image_profile_00.svg";
+
 interface FollowProps {
   id: string;
   nickname: string;
-  image: string;
+  image: { src: string };
 }
 export default function FollowRecommend() {
   const onFollow = () => {};
@@ -17,9 +19,9 @@ export default function FollowRecommend() {
     const initFollowList = [];
     for (let i = 1; i < 6; i++) {
       initFollowList.push({
-        id: "id1",
-        nickname: "nickname1",
-        image: "",
+        id: "id111",
+        nickname: "nickname111",
+        image: DefaultProfile,
       });
     }
     setFollowList(initFollowList);
@@ -30,15 +32,14 @@ export default function FollowRecommend() {
   }, []);
 
   return (
-    <StyledFollowRecommend>
-      {/* 팔로우 추천 */}
-
+    <StyledFollowRecommend className="followRecommend">
+      <h3>Follow Recommend</h3>
       {followList.map((item, idx) => {
         return (
           <div className="container" key={idx}>
             <div className="userLogoSection">
               <div className="userLogo">
-                <img src={item.image} alt={item.id} />
+                <img src={item.image.src} alt={item.id} />
               </div>
               <div className="userInfo">
                 <div className="title">{item.id}</div>

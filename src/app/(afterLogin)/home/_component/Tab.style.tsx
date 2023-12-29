@@ -51,9 +51,9 @@ export const StyledTab = styled.div`
 .tabIndicator {
     height: 4px;
     align-self: center;
-    background-color: rgb(29, 155, 240);
-    min-width: 56px;
-    width: 56px;
+    background: ${(props) => props.theme.colors.blue_0};
+    min-width: 100px;
+    width: 100px;
     position: absolute;
     bottom: 0px;
     border-radius: 9999px;

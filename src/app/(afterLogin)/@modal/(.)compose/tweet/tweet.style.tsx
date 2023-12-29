@@ -130,10 +130,10 @@ export const StyledTweetModal = styled.div`
     cursor: pointer;
     width: 94px;
     height: 36px;
-    border-radius: 18px;
+    border-radius: 8px;
     border: none;
     margin: 8px 0;
-    background-color: ${(props) => props.theme.colors.blue_0};
+    background: ${(props) => props.theme.colors.blue_0};
     color: ${(props) => props.theme.colors.white_0};
     
 }

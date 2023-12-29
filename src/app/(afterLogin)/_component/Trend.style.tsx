@@ -2,14 +2,19 @@ import Link from "next/link";
 import styled from "styled-components";
 
 export const StyledTrend = styled(Link)`
-    margin: 15px 0;
+    margin: 30px 0;
     display: block;
 
-    .title{
+    > div{
+        margin: 7px 0;
 
-    }
-    .count{
-        color:#829bb5;
-        font-size: 12px;
+        &.count,
+        &.posts{
+            color: ${(props) => props.theme.colors.black_3};
+            
+            span{
+                font-size: 13px;
+            }
+        }
     }
 `;

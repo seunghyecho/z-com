@@ -24,11 +24,12 @@ export default function PostForm({}) {
   };
 
   const onClickActionButton = () => {};
+
   return (
     <StyledPostForm className="postForm" onSubmit={onSubmit}>
       <div className="postUserSection">
         <div className="postUserImage">
-          <img src={me.image} alt={me.image} />
+          <img src={me.image.src} alt={me.image.src} />
         </div>
       </div>
       <div className="postInputSection">
@@ -48,7 +49,7 @@ export default function PostForm({}) {
               </button>
             </div>
             <button className="actionButton" onClick={onClickActionButton}>
-              게시하기
+              Post
             </button>
           </div>
         </div>

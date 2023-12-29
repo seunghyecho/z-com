@@ -56,7 +56,7 @@ color: #000;
     align-items: center;
     height: 38px;
     box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 28px;
-    background-color: rgb(127, 196, 243);
+    background: ${(props) => props.theme.colors.blue_0};
     width: 234px;
     border: none;
     color: rgb(255, 255, 255);
@@ -65,9 +65,6 @@ color: #000;
     border-radius: 8px;
 }
 
-.postButton:hover {
-    background-color: rgb(26, 140, 216);
-}
 
 .logoutButton{
 position: absolute;
@@ -100,48 +97,5 @@ width: 100%;
     padding-left: 30px;
     width: 350px;
     height: 100%;
-}
-
-.search {
-    position: fixed;
-    height: 42px;
-    width: inherit;
-    border-radius: 21px;
-    background-color: rgb(239, 243, 244);
-    margin-top: 6px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
-
-.search svg {
-    margin-left: 20px;
-    fill: rgb(83, 100, 113);
-}
-
-.search input {
-    outline: none;
-    background-color: inherit;
-    border: none;
-    padding: 12px;
-    margin-left: 5px;
-    font-size: 15px;
-    width: 100%;
-}
-
-.followRecommend {
-    margin: 12px 0;
-    padding: 12px 16px;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 6px;
-    width: inherit;
-
-    background: #fff;
-    
-    h3 {
-        padding-bottom: 12px;
-    }
 }
 `;

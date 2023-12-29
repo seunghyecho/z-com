@@ -1,7 +1,7 @@
 "use client";
 
-import { IoMdArrowRoundBack } from "react-icons/io";
 import { StyledBackButton } from "./BackButton.style";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 export default function BackButton() {
   return (

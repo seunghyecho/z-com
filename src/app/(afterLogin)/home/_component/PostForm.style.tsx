@@ -86,10 +86,8 @@ textarea::placeholder {
     color: rgb(255, 255, 255);
     font-weight: 400;
     font-size: 13px;
-    border-radius: 18px;
-    background-color: rgb(127, 196, 243);
+    border-radius: 8px;
+    background: ${(props) => props.theme.colors.blue_0};
 }
-.actionButton:hover {
-    background-color: rgb(26, 140, 216);
-}
+
 `;

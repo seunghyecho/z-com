@@ -28,7 +28,7 @@ export default function CommentForm() {
     <StyledCommentForm className="postForm" onSubmit={onSubmit}>
       <div className="postUserSection">
         <div className="postUserImage">
-          <img src={me.image} alt={me.image} />
+          <img src={me.image.src} alt={me.image.src} />
         </div>
       </div>
       <div className="postInputSection">

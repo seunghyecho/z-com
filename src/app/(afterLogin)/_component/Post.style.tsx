@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const StyledPost = styled.div`
+color: ${(props) => props.theme.colors.black_2};
+
 .postBar{
     display: inline-block;
     font-size: 0.6rem;
@@ -57,7 +59,11 @@ export const StyledPost = styled.div`
 }
 
 .postUserName {
-    font-weight: bold;
+    font-weight: 600;
+
+    + span.postUserId{
+        color: ${(props) => props.theme.colors.black_3};
+    }
 }
 .postUserNick, .postDate {
     color: rgb(83, 100, 113);

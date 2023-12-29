@@ -15,8 +15,8 @@ export default function TrendSection() {
     for (let i = 1; i < 11; i++) {
       initTrend.push({
         post: "실시간 트렌드",
-        title: "title",
-        count: 1234,
+        title: "실시간 트렌드 TITLE",
+        count: 999,
       });
     }
     setTrendList(initTrend);
@@ -29,9 +29,8 @@ export default function TrendSection() {
   if (pathname === "/explore") return null;
   return (
     <StyledTrendSection className="trendBg">
-      {/* 실시간 트렌드 */}
       <div className="trend">
-        <h3>Trend For Me</h3>
+        <h3>Trend For You</h3>
         {trendList?.map((item, idx) => {
           const { post, title, count } = item;
 

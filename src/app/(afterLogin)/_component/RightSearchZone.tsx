@@ -1,9 +1,11 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import SearchForm from "@/app/(afterLogin)/_component/SearchForm";
 
 import { StyledRightSearchZone } from "./RightSearchZone.style";
+
+import SearchForm from "@/app/(afterLogin)/_component/SearchForm";
+
 export default function RightSearchZone() {
   const pathname = usePathname();
   const onChangeAll = () => {};
@@ -14,25 +16,51 @@ export default function RightSearchZone() {
   }
   if (pathname === "/search") {
     return (
-      <StyledRightSearchZone>
-        <h5 className="filterTitle">검색 필터</h5>
-        <div className={"filterSection"}>
+      <StyledRightSearchZone className="filter">
+        <h5 className="filterTitle">Search Filters</h5>
+        <div className="filterSection">
           <div>
-            <label>사용자</label>
-            <div className={"radio"}>
-              <div>모든 사용자</div>
+            <label className="filterLabel">People</label>
+            <div className="radio">
+              <label htmlFor="fromAnyone">From anyone</label>
               <input
+                id="fromAnyone"
                 type="radio"
                 name="pf"
                 defaultChecked
                 onChange={onChangeAll}
               />
             </div>
-            <div className={"radio"}>
-              <div>내가 팔로우하는 사람들</div>
+            <div className="radio">
+              <label htmlFor="peopleYouFollow">People you follow</label>
               <input
+                id="peopleYouFollow"
                 type="radio"
                 name="pf"
+                value="on"
+                onChange={onChangeFollow}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="filterLabel">Location</label>
+            <div className="radio">
+              <label htmlFor="anywhere">Anywhere</label>
+              <input
+                id="anywhere"
+                type="radio"
+                name="location"
+                defaultChecked
+                onChange={onChangeAll}
+              />
+            </div>
+            <div className="radio">
+              <label htmlFor="nearYou">Near you</label>
+              <input
+                id="nearYou"
+                type="radio"
+                name="location"
                 value="on"
                 onChange={onChangeFollow}
               />

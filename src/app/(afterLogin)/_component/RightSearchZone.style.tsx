@@ -5,7 +5,7 @@ export const StyledRightSearchZone = styled.div`
     position: fixed;
     height: 42px;
     width: inherit;
-    border-radius: 21px;
+    border-radius: 8px;
     background-color: rgb(239, 243, 244);
     margin-top: 6px;
     margin-bottom: 12px;
@@ -27,38 +27,38 @@ export const StyledRightSearchZone = styled.div`
     font-size: 15px;
 }
 
+/* filter */
 .filterTitle {
-    background: #ffffff;
-    padding: 12px 16px;
-    color: rgba(15,20,25,1.00);
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 16px;
-    border-radius: 16px;
-    border: 1px solid rgb(239,243,244);
     margin-top: 12px;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid rgb(239,243,244);
+    color: rgba(15,20,25,1.00);
+    font-weight: bold;
 }
 
 .filterSection {
-    padding: 0 16px 12px;
-    margin-bottom: 16px;
-    border-radius: 16px;
+    padding: 12px 16px;
+    border-radius: 8px;
     border: 1px solid rgb(239,243,244);
+
+    > div{
+        margin-bottom: 32px;
+    }
+
+    .filterLabel {
+        padding-bottom: 8px;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    .radio {
+        margin: 16px 0;
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
-.filterSection label {
-    font-size: 15px;
-    font-weight: bold;
-    height: 36px;
-    display: flex;
-    align-items: center;
-}
-
-.radio {
-    display: flex;
-}
-
-.radio > div {
-    flex: 1;
-}
 `;

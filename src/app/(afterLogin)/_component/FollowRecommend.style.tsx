@@ -1,24 +1,20 @@
 import styled from "styled-components";
 
 export const StyledFollowRecommend = styled.div`
+margin: 12px 0;
+width: 100%;
 
+h3 {
+    margin: 30px 0;
+    font-weight: 600;
+}
 
 .container{
+    padding: 7px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 7px 14px;
-    width: 100%;
-    text-align: left;
-    color:  #2a68a6f3;
-
-    &:hover {
-        background-color: rgba(15,20,25, 0.1);
-        border-radius: 29px;
-    }
-    }
-
-
+}
 
 .userLogoSection {
     display: flex;
@@ -33,22 +29,20 @@ export const StyledFollowRecommend = styled.div`
 .userInfo {
     margin: 0 12px;
     .count{
-        color:#829bb5;
+        color: ${(props) => props.theme.colors.black_3};
         font-size: 12px;
     }
 }
+
 .followButtonSection {
     button{
-        font-size: 10px;
         padding: 10px;
-        width: auto;
+        width: 100%;
         border: none;
-        background: none;
+        border-radius: 8px;
+        color: ${(props) => props.theme.colors.white_0};
+        background: ${(props) => props.theme.colors.blue_0};
         cursor: pointer;
-        width: auto;
-        border-radius: 6px;
-        color:#fff;
-        background-color:rgb(127, 196, 243);
     }
 }
 

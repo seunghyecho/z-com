@@ -55,16 +55,13 @@ export default function AfterLoginLayout({
       </header>
       <div className="rightSectionWrapper">
         <div className="rightSectionInner">
-          <div>{children}</div>
+          {children}
           <section className="rightSection">
             <RightSearchZone />
 
             <TrendSection />
 
-            <div className="followRecommend">
-              <h3>Follow Recommend</h3>
-              <FollowRecommend />
-            </div>
+            <FollowRecommend />
           </section>
         </div>
       </div>

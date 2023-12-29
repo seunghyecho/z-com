@@ -7,6 +7,8 @@ import { StyledPost } from "./Post.style";
 import ActionButton from "./ActionButton";
 import PostArticle from "./PostArticle";
 
+import DefaultProfile from "../../../../public/assets/images/image_profile_00.svg";
+
 import { faker } from "@faker-js/faker";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko"; // 한국어 가져오기
@@ -17,13 +19,14 @@ dayjs.locale("ko");
 interface PostProps {
   noImage?: boolean;
 }
+
 export default function Post({ noImage }: PostProps) {
   const target = {
     postId: 1,
     User: {
       id: "shcho",
       nickname: "shcho",
-      image: "",
+      image: DefaultProfile,
     },
     Images: [] as any[],
     createdAt: new Date(),
@@ -39,7 +42,7 @@ export default function Post({ noImage }: PostProps) {
         <div className="postWrapper">
           <div className="postUserSection">
             <Link href={target.User.id} className="postUserImage">
-              <img src={target.User.image} alt="" />
+              <img src={target.User.image.src} alt="" />
             </Link>
             <div className="postShade" />
           </div>

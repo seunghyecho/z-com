@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import Trend, { TrendProps } from "@/app/(afterLogin)/_component/Trend";
 import SearchForm from "@/app/(afterLogin)/_component/SearchForm";
-
 import { StyledExplore } from "./explore.style";
+
 export default function Home() {
   const [trendList, setTrendList] = useState<TrendProps[]>();
 
@@ -25,13 +25,13 @@ export default function Home() {
   }, []);
 
   return (
-    <StyledExplore className="main">
+    <StyledExplore>
       <div className="formZone">
         <SearchForm />
       </div>
 
       <div className="trend">
-        <h3>Trend For Me</h3>
+        <h3>Trend For You</h3>
         {trendList?.map((item, idx) => {
           const { post, title, count } = item;
 

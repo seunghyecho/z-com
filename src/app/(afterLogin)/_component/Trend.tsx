@@ -10,7 +10,9 @@ export default function Trend({ post, title, count }: TrendProps) {
     <StyledTrend href={`/search?q=trend`} className="container">
       <div className="count">{post}</div>
       <div className="title">{title}</div>
-      <div className="count">{count} posts</div>
+      <div className="posts">
+        {count} <span>posts</span>
+      </div>
     </StyledTrend>
   );
 }

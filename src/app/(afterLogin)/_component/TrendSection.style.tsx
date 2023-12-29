@@ -1,16 +1,8 @@
 import styled from "styled-components";
 
 export const StyledTrendSection = styled.div`
-    margin: 60px 0 12px;
-    padding: 12px 16px;
-    font-size: 15px;
+    margin: 60px 0 0;
+    padding: 12px 0;
+    width: 100%;
     font-weight: 600;
-    border-radius: 8px;
-    background-color: #fff;
-    width: inherit;
-
-
-    .trendBg{
-        width: inherit;
-    }
 `;

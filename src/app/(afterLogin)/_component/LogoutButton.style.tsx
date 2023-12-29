@@ -7,9 +7,9 @@ padding: 7px 14px;
 width: 100%;
 cursor: pointer;
 border: none;
-background-color: #fff;
+background-color: unset;
 text-align: left;
-color:  #2a68a6f3;;
+color: ${(props) => props.theme.colors.black_2};
 
 &:hover {
     background-color: rgba(15,20,25, 0.1);
@@ -28,6 +28,9 @@ color:  #2a68a6f3;;
     margin: 0 12px;
 }
 .logoutUserName > div:first-child {
-    font-weight: bold;
+    font-weight: 600;
+}
+.logoutUserName > div:last-child {
+    color: ${(props) => props.theme.colors.black_3};
 }
 `;

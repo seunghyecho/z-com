@@ -1,3 +1,7 @@
+"use client";
+
+import { StyledMessages } from "./messages.style";
+
 export default function Home() {
-  return <main>Messages page</main>;
+  return <StyledMessages></StyledMessages>;
 }

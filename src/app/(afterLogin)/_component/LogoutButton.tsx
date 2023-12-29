@@ -10,9 +10,9 @@ export default function LogoutButton({}: LogoutButtonProps) {
   const onLogout = () => {};
 
   return (
-    <StyledLogoutButton className="logoutButton" onClick={onLogout}>
+    <StyledLogoutButton className="" onClick={onLogout}>
       <div className="logoutUserImage">
-        <img src={me.image} alt={me.id} />
+        <img src={me.image.src} alt={me.id} />
       </div>
       <div className="logoutUserName">
         <div>{me.nickname}</div>
