@@ -2,19 +2,26 @@ import Link from "next/link";
 import styled from "styled-components";
 
 export const StyledTrend = styled(Link)`
-    margin: 30px 0;
-    display: block;
+margin-top: 10px;
+padding: 15px 10px;
+display: block;
+transition: background-color .5s;
 
-    > div{
-        margin: 7px 0;
+&:hover{
+    background-color: ${(props) => props.theme.colors.black_0};
+    cursor: pointer;
+}
 
-        &.count,
-        &.posts{
-            color: ${(props) => props.theme.colors.black_3};
-            
-            span{
-                font-size: 13px;
-            }
+> div{
+    margin: 7px 0;
+
+    &.count,
+    &.posts{
+        color: ${(props) => props.theme.colors.black_3};
+        
+        span{
+            font-size: 13px;
         }
     }
+}
 `;

@@ -58,6 +58,30 @@ export const StyledRightSearchZone = styled.div`
         margin: 16px 0;
         display: flex;
         justify-content: space-between;
+
+        background-image: url(CheckedFocus);
+
+        input[type="radio"]{
+            appearance: none;
+            border: max(2px, 0.1em) solid gray;
+            border-radius: 50%;
+            width: 1.25em;
+            height: 1.25em;
+            
+            &:checked {
+                border: ${(props) => props.theme.colors.border};
+            }
+
+            &:focus-visible {
+                outline: ${(props) => props.theme.colors.outline};
+                outline-offset: max(2px, 0.1em);
+            }
+
+            &:hover {
+                box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
+                cursor: pointer;
+            }
+        }
     }
 }
 
