@@ -10,4 +10,19 @@ border-right-style: solid;
 display: flex;
 flex-direction: column;
 align-items: stretch;
+
+.header {
+    height: 53px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.header h3 {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+
 `;
