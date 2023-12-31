@@ -9,6 +9,7 @@ import LogoutButton from "@/app/(afterLogin)/_component/LogoutButton";
 import TrendSection from "@/app/(afterLogin)/_component/TrendSection";
 import FollowRecommend from "@/app/(afterLogin)/_component/FollowRecommend";
 import RightSearchZone from "@/app/(afterLogin)/_component/RightSearchZone";
+import { MdOutlinePostAdd } from "react-icons/md";
 
 import { StyledAfterLoginLayout } from "./layout.style";
 interface AfterLoginLayoutProps {
@@ -41,9 +42,12 @@ export default function AfterLoginLayout({
 
                 {/* Post */}
 
-                <Link href="/compose/tweet" className="postButton">
-                  Post
-                </Link>
+                <div className="postButton">
+                  <Link href="/compose/tweet">
+                    <MdOutlinePostAdd size={20} />
+                    <span>Post</span>
+                  </Link>
+                </div>
 
                 <div className="logoutButton">
                   <LogoutButton />

@@ -13,7 +13,7 @@ li{
         width: 100%;
 
         .navPill {
-            display: inline-flex;
+            display: flex;
             margin: 2px 0;
             width: 100%;
             height: 38px;
@@ -29,6 +29,31 @@ li{
             margin-left: 20px;
             font-size: 14px;
         }
+    }
+}
+
+
+@media all and (max-width: 1300px) {
+    li a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navPill{
+        display: inline-flex;
+        margin: 2px 0;
+        width: 100%;
+        height: 38px;
+        padding: 7px 14px;
+        align-items: center;
+    }
+    .navPill > div {
+        margin-left: 20px;
+        margin-right: 16px;
+        font-size: 20px;
+        
+        display: none;
     }
 }
 `;

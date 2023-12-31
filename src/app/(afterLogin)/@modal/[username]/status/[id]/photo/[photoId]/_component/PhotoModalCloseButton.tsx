@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { IoMdArrowRoundBack } from "react-icons/io";
+import { SlClose } from "react-icons/sl";
 import { StyledPhotoModalCloseButton } from "./PhotoModalCloseButton.style";
 
 export default function PhotoModalCloseButton() {
@@ -11,7 +11,7 @@ export default function PhotoModalCloseButton() {
   };
   return (
     <StyledPhotoModalCloseButton className="closeButton" onClick={onClick}>
-      <IoMdArrowRoundBack size={20} color={"#000"} />
+      <SlClose size={20} color={"#fff"} />
     </StyledPhotoModalCloseButton>
   );
 }
