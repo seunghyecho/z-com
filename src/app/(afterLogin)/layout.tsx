@@ -12,6 +12,8 @@ import RightSearchZone from "@/app/(afterLogin)/_component/RightSearchZone";
 import { MdOutlinePostAdd } from "react-icons/md";
 
 import { StyledAfterLoginLayout } from "./layout.style";
+// import { auth } from "@/auth"; // server component 에서
+import { useSession } from "next-auth/react"; // client component 에서
 interface AfterLoginLayoutProps {
   children: React.ReactNode;
   modal: React.ReactNode;
@@ -22,6 +24,8 @@ export default function AfterLoginLayout({
   modal,
 }: AfterLoginLayoutProps) {
   const segment = useSelectedLayoutSegment();
+  // const session = await auth();
+  const { data: session } = useSession();
 
   return (
     <StyledAfterLoginLayout className="container">
@@ -31,28 +35,30 @@ export default function AfterLoginLayout({
             <div className="leftSectionFixed">
               {/* logo */}
 
-              <Link className="logo" href="home">
+              <Link className="logo" href={session?.user ? "/home" : "/"}>
                 <div className="logoPill"></div>
               </Link>
 
               {/* Nav Menu */}
 
-              <nav>
-                <NavMenu />
+              {session?.user && (
+                <nav>
+                  <NavMenu />
 
-                {/* Post */}
+                  {/* Post */}
 
-                <div className="postButton">
-                  <Link href="/compose/tweet">
-                    <MdOutlinePostAdd size={20} />
-                    <span>Post</span>
-                  </Link>
-                </div>
+                  <div className="postButton">
+                    <Link href="/compose/tweet">
+                      <MdOutlinePostAdd size={20} />
+                      <span>Post</span>
+                    </Link>
+                  </div>
 
-                <div className="logoutButton">
-                  <LogoutButton />
-                </div>
-              </nav>
+                  <div className="logoutButton">
+                    <LogoutButton />
+                  </div>
+                </nav>
+              )}
             </div>
           </div>
         </section>

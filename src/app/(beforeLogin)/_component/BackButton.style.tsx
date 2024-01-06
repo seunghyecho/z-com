@@ -10,7 +10,6 @@ export const StyledBackButton = styled.button`
     transition: background-color .5s;
 
     &:hover {
-        
-    background-color: ${(props) => props.theme.colors.black_1};
-}
+        background-color: ${(props) => props.theme.colors.black_1};
+    }
 `;

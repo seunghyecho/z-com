@@ -7,15 +7,22 @@ import onSubmit from "@/app/(beforeLogin)/_lib/signup";
 import { StyledSignupModal } from "./SignupModal.style";
 
 function showMessage(message: string | undefined) {
-  if (
-    message === "no_id" ||
-    message === "no_name" ||
-    message === "no_password" ||
-    message === "no_image" ||
-    message === "user_exists"
-  ) {
-    return "No exists";
+  if (message === "no_id") {
+    return "No Id";
   }
+  if (message === "no_name") {
+    return "No Name";
+  }
+  if (message === "no_password") {
+    return "No Password";
+  }
+  if (message === "no_image") {
+    return "No Image";
+  }
+  if (message === "user_exists") {
+    return "Already exists";
+  }
+
   return "";
 }
 export default function SignupModal() {

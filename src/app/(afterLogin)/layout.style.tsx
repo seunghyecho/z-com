@@ -72,7 +72,7 @@ color: #000;
     justify-content: center;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 28px;
-    background-color: rgb(29, 155, 240);
+    background: ${(props) => props.theme.colors.blue_0};
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -82,9 +82,6 @@ color: #000;
     font-size: 17px;
 
     
-}
-.postButton a:hover {
-    background-color: rgb(26, 140, 216);
 }
 .postButton a span {
     display: none;

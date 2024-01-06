@@ -5,4 +5,7 @@ export const StyledTrendSection = styled.div`
     padding: 12px 0;
     width: 100%;
     font-weight: 600;
+
+    .noTrend{
+    }
 `;

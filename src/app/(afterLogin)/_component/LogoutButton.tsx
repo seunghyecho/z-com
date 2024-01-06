@@ -2,21 +2,33 @@
 
 import Image from "next/image";
 import { StyledLogoutButton } from "./LogoutButton.style";
-import { me } from "@/app/const/common";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface LogoutButtonProps {}
 
 export default function LogoutButton({}: LogoutButtonProps) {
-  const onLogout = () => {};
+  const router = useRouter();
+
+  const { data: me } = useSession();
+  const onLogout = () => {
+    signOut({ redirect: false }).then(() => {
+      router.replace("/");
+    });
+  };
+
+  if (!me?.user) {
+    return null;
+  }
 
   return (
     <StyledLogoutButton className="" onClick={onLogout}>
       <div className="logoutUserImage">
-        <img src={me.image.src} alt={me.id} />
+        <img src={me.user?.image as string} alt={me.user?.email as string} />
       </div>
       <div className="logoutUserName">
-        <div>{me.nickname}</div>
-        <div>@{me.id}</div>
+        <div>{me.user?.name}</div>
+        <div>@{me.user?.email}</div>
       </div>
     </StyledLogoutButton>
   );

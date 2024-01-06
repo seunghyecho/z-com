@@ -12,7 +12,7 @@ export default function Main() {
         <Link href="/i/flow/signup" className="signup">
           Create Account
         </Link>
-        <Link href="/login" className="login">
+        <Link href="/i/flow/login" className="login">
           Login
         </Link>
       </div>
