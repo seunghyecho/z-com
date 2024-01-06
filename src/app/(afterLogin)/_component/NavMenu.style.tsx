@@ -22,7 +22,7 @@ li{
         }
         .navPill:hover {
             background-color: rgba(15,20,25, 0.1);
-            border-radius: 29px;
+            border-radius: 8px;
         }
 
         .navPill > div {

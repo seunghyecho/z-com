@@ -1,11 +1,9 @@
-"use client";
-
 import LoginModal from "@/app/(beforeLogin)/_component/LoginModal";
 
-export default function Page() {
+export default function Login() {
   return (
     <>
-      로그인 가로채기지
+      <p>This is PARALLEL Layout</p>
       <LoginModal />
     </>
   );

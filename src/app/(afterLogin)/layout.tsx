@@ -45,8 +45,6 @@ export default function AfterLoginLayout({
                 <nav>
                   <NavMenu />
 
-                  {/* Post */}
-
                   <div className="postButton">
                     <Link href="/compose/tweet">
                       <MdOutlinePostAdd size={20} />
@@ -54,9 +52,7 @@ export default function AfterLoginLayout({
                     </Link>
                   </div>
 
-                  <div className="logoutButton">
-                    <LogoutButton />
-                  </div>
+                  <LogoutButton />
                 </nav>
               )}
             </div>

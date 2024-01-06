@@ -96,7 +96,7 @@ color: #000;
     .postButton a {
         height: 52px;
         width: 234px;
-        border-radius: 26px;
+        border-radius: 8px;
     }
     .postButton a span {
         display: inline-block;
@@ -106,11 +106,6 @@ color: #000;
     }
 }
 
-.logoutButton{
-    position: absolute;
-    bottom: 30px;
-    width: 100%;
-}
 
 .rightSectionWrapper {
     display: flex;
@@ -145,12 +140,7 @@ color: #000;
 }
 
 .followRecommend {
-    font-size: 20px;
-    font-weight: bold;
-    background-color: rgb(247, 249, 249);
-    border-radius: 16px;
     margin: 12px 0;
-    padding: 12px 16px;
 }
 .followRecommend h3 {
     padding-bottom: 12px;
