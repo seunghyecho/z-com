@@ -1,40 +1,28 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import dayjs from "dayjs";
-
-import { StyledPost } from "./Post.style";
-
-import ActionButton from "./ActionButton";
-import PostArticle from "./PostArticle";
-
-import DefaultProfile from "../../../../public/assets/images/image_profile_00.svg";
-
 import { faker } from "@faker-js/faker";
+import { StyledPost } from "./Post.style";
+import ActionButton from "@/app/(afterLogin)/_component/ActionButton";
+import PostArticle from "@/app/(afterLogin)/_component/PostArticle";
+import PostImages from "@/app/(afterLogin)/_component/PostImages";
+import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko"; // 한국어 가져오기
-import PostImages from "./PostImages";
 import { useEffect, useState } from "react";
+import { Post } from "@/model/Post";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
 interface PostProps {
   noImage?: boolean;
+  post: Post;
 }
 
-export default function Post({ noImage }: PostProps) {
-  const [target, setTarget] = useState({
-    postId: 1,
-    User: {
-      id: "shcho",
-      nickname: "shcho",
-      image: DefaultProfile,
-    },
-    Images: [] as any[],
-    createdAt: new Date(),
-    content: "이렇게 게시되는 글 입니다.",
-  });
-
+export default function Post({ noImage, post }: PostProps) {
+  const [target, setTarget] = useState(post);
   useEffect(() => {
     if (Math.random() > 0.5 && !noImage) {
       setTarget((target) => {
@@ -56,7 +44,7 @@ export default function Post({ noImage }: PostProps) {
         <div className="postWrapper">
           <div className="postUserSection">
             <Link href={target.User.id} className="postUserImage">
-              <img src={target.User.image.src} alt="" />
+              <img src={target.User.image} alt={target.User.id} />
             </Link>
             <div className="postShade" />
           </div>

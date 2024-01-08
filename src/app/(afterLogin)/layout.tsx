@@ -14,6 +14,7 @@ import { MdOutlinePostAdd } from "react-icons/md";
 import { StyledAfterLoginLayout } from "./layout.style";
 // import { auth } from "@/auth"; // server component 에서
 import { useSession } from "next-auth/react"; // client component 에서
+import RQProvider from "./_component/RQProvider";
 interface AfterLoginLayoutProps {
   children: React.ReactNode;
   modal: React.ReactNode;
@@ -59,19 +60,20 @@ export default function AfterLoginLayout({
           </div>
         </section>
       </header>
-      <div className="rightSectionWrapper">
-        <div className="rightSectionInner">
-          {children}
-          <section className="rightSection">
-            <RightSearchZone />
 
-            <TrendSection />
-
-            <FollowRecommend />
-          </section>
+      <RQProvider>
+        <div className="rightSectionWrapper">
+          <div className="rightSectionInner">
+            {children}
+            <section className="rightSection">
+              <RightSearchZone />
+              <TrendSection />
+              <FollowRecommend />
+            </section>
+          </div>
         </div>
-      </div>
-      {modal}
+        {modal}
+      </RQProvider>
     </StyledAfterLoginLayout>
   );
 }
