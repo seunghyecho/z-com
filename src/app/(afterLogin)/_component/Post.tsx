@@ -13,6 +13,7 @@ import { faker } from "@faker-js/faker";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko"; // 한국어 가져오기
 import PostImages from "./PostImages";
+import { useEffect, useState } from "react";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -22,7 +23,7 @@ interface PostProps {
 }
 
 export default function Post({ noImage }: PostProps) {
-  const target = {
+  const [target, setTarget] = useState({
     postId: 1,
     User: {
       id: "shcho",
@@ -32,16 +33,23 @@ export default function Post({ noImage }: PostProps) {
     Images: [] as any[],
     createdAt: new Date(),
     content: "이렇게 게시되는 글 입니다.",
-  };
+  });
 
-  if (Math.random() > 0.5 && !noImage) {
-    target.Images.push(
-      { imageId: 1, link: faker.image.urlLoremFlickr() },
-      { imageId: 2, link: faker.image.urlLoremFlickr() },
-      { imageId: 3, link: faker.image.urlLoremFlickr() },
-      { imageId: 4, link: faker.image.urlLoremFlickr() }
-    );
-  }
+  useEffect(() => {
+    if (Math.random() > 0.5 && !noImage) {
+      setTarget((target) => {
+        target.Images = [
+          ...target.Images,
+          { imageId: 1, link: faker.image.urlLoremFlickr() },
+          { imageId: 2, link: faker.image.urlLoremFlickr() },
+          { imageId: 3, link: faker.image.urlLoremFlickr() },
+          { imageId: 4, link: faker.image.urlLoremFlickr() },
+        ];
+        return { ...target };
+      });
+    }
+  }, []);
+
   return (
     <PostArticle post={target}>
       <StyledPost>

@@ -11,6 +11,8 @@ export const {
     signIn: "/i/flow/login",
     newUser: "/i/flow/signup",
   },
+  // middleware.ts 로 대체
+  //
   // callbacks: {
   //   async authorized({ request, auth }) {
   //     if (!auth) {

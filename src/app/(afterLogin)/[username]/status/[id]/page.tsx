@@ -1,3 +1,5 @@
+"use client";
+
 import BackButton from "@/app/(afterLogin)/_component/BackButton";
 import Post from "@/app/(afterLogin)/_component/Post";
 import { StyledSinglePost } from "./SinglePost.style";

@@ -1,3 +1,5 @@
+"use client";
+
 import Home from "@/app/(afterLogin)/home/page";
 
 interface PageProps {
@@ -8,7 +10,6 @@ interface PageProps {
   };
 }
 export default function Page({ params }: PageProps) {
-  console.log(params);
   // photo 모달 뒷 배경
   return <Home />;
 }
