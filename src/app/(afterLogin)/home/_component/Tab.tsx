@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useContext } from "react";
 import { StyledTab } from "./Tab.style";
+import { TabContext } from "@/app/(afterLogin)/home/_component/TabProvider";
 
 export const me = {
   id: "shcho",
@@ -10,7 +11,8 @@ export const me = {
 };
 
 export default function Tab() {
-  const [tab, setTab] = useState("recommend");
+  const { tab, setTab } = useContext(TabContext);
+
   const onClickRecommend = () => {
     setTab("recommend");
   };

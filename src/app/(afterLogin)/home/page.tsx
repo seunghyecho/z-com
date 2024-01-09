@@ -10,6 +10,7 @@ import { getPostRecommends } from "@/app/(afterLogin)/home/_lib/getPostRecommend
 import PostRecommends from "@/app/(afterLogin)/home/_component/PostRecommends";
 
 import type { Metadata } from "next";
+import TabDecider from "./_component/TabDecider";
 
 /**
  * 메인 홈 페이지
@@ -36,7 +37,7 @@ export default async function Home() {
         <TabProvider>
           <Tab />
           <PostForm />
-          <PostRecommends />
+          <TabDecider />
         </TabProvider>
       </HydrationBoundary>
     </main>
