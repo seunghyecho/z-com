@@ -4,12 +4,10 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { StyledFollowRecommend } from "./FollowRecommend.style";
 
-import DefaultProfile from "../../../../public/assets/images/image_profile_00.svg";
-
 interface FollowProps {
   id: string;
   nickname: string;
-  image: { src: string };
+  image: string;
 }
 export default function FollowRecommend() {
   const onFollow = () => {};
@@ -21,7 +19,7 @@ export default function FollowRecommend() {
       initFollowList.push({
         id: "id111",
         nickname: "nickname111",
-        image: DefaultProfile,
+        image: "",
       });
     }
     setFollowList(initFollowList);
