@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
+import { RxAvatar } from "react-icons/rx";
 import BackButton from "@/app/(afterLogin)/_component/BackButton";
 import { getUser } from "@/app/(afterLogin)/[username]/_lib/getUser";
 import { User } from "@/model/User";
@@ -24,8 +25,7 @@ export default function UserInfo({ username }: UserInfoProps) {
     gcTime: 300 * 1000,
   });
 
-  console.log(me);
-  console.dir(error);
+  // console.dir(error);
 
   const onClickFollow = () => {
     if (!session?.user) {
@@ -42,7 +42,7 @@ export default function UserInfo({ username }: UserInfoProps) {
         </div>
         <div className="userZone">
           <div className="userImage">
-            <img src={undefined} alt={undefined} />
+            <RxAvatar size={"134px"} color="rgba(15,20,25, 0.1)" />
           </div>
           <div className="userName">
             <h2>{username}</h2>
