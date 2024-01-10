@@ -1,15 +1,15 @@
 "use client";
 
-import { ChangeEventHandler, FormEventHandler, useRef, useState } from "react";
-import { StyledPostForm } from "./PostForm.style";
-import { IoMdImages } from "react-icons/io";
-import { me } from "@/app/const/common";
 import Image from "next/image";
+import { ChangeEventHandler, FormEventHandler, useRef, useState } from "react";
+import { IoMdImages } from "react-icons/io";
+import { useSession } from "next-auth/react";
+import { StyledPostForm } from "./PostForm.style";
 
 export default function PostForm({}) {
   const imageRef = useRef<HTMLInputElement>(null); // input useRef error로 인한 타입스크립트 처리
-
   const [content, setContent] = useState("");
+  const { data: session } = useSession();
 
   const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setContent(e.target.value);
@@ -25,11 +25,16 @@ export default function PostForm({}) {
 
   const onClickActionButton = () => {};
 
+  if (!session?.user) return;
+
   return (
     <StyledPostForm className="postForm" onSubmit={onSubmit}>
       <div className="postUserSection">
         <div className="postUserImage">
-          <img src={me.image.src} alt={me.image.src} />
+          <img
+            src={session?.user.image as string}
+            alt={session?.user.email as string}
+          />
         </div>
       </div>
       <div className="postInputSection">

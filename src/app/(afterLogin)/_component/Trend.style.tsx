@@ -2,8 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 
 export const StyledTrend = styled(Link)`
-margin-top: 10px;
-padding: 15px 10px;
+padding: 5px 10px;
 display: block;
 transition: background-color .5s;
 

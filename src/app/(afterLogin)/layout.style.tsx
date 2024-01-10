@@ -122,7 +122,7 @@ color: #000;
 @media all and (min-width: 1024px) {
     .rightSection {
         display: inline-block;
-        width: 350px;
+        width: 380px;
         height: 100%;
     }
     .rightSectionInner {

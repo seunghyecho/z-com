@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
-
+    
     .main {
         width: 600px;
         border-color: rgb(239, 243, 244);
@@ -24,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
             transform: rotate(360deg);
         }
     }
+    
     .loader {
         animation: rotating 2s linear infinite;
     }
