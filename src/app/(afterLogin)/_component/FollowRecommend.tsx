@@ -1,47 +1,33 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { StyledFollowRecommend } from "./FollowRecommend.style";
+import { getFollowRecommends } from "@/app/(afterLogin)/_lib/getFollowRecommends";
+import { User } from "@/model/User";
 
-interface FollowProps {
-  id: string;
-  nickname: string;
-  image: string;
-}
 export default function FollowRecommend() {
+  const { data } = useQuery<User[]>({
+    queryKey: ["users", "followRecommends"],
+    queryFn: getFollowRecommends,
+    staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
+    gcTime: 300 * 1000,
+  });
   const onFollow = () => {};
-
-  const [followList, setFollowList] = useState<FollowProps[]>([]);
-  const init = () => {
-    const initFollowList = [];
-    for (let i = 1; i < 6; i++) {
-      initFollowList.push({
-        id: "id111",
-        nickname: "nickname111",
-        image: "",
-      });
-    }
-    setFollowList(initFollowList);
-  };
-
-  useEffect(() => {
-    init();
-  }, []);
 
   return (
     <StyledFollowRecommend className="followRecommend">
       <h3>Follow Recommend</h3>
-      {followList.map((item, idx) => {
+      {data?.map((user, idx) => {
         return (
           <div className="container" key={idx}>
             <div className="userLogoSection">
               <div className="userLogo">
-                <img src={item.image.src} alt={item.id} />
+                <img src={user?.image} alt={user?.id} />
               </div>
               <div className="userInfo">
-                <div className="title">{item.id}</div>
-                <div className="count">@{item.nickname}</div>
+                <div className="title">{user?.id}</div>
+                <div className="count">@{user?.nickname}</div>
               </div>
             </div>
             <div className="followButtonSection">

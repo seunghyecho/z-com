@@ -15,7 +15,9 @@ function generateDate() {
 const User = [
   { id: "shcho111", nickname: "sh Cho111", image: faker.image.avatar() },
   { id: "shcho222", nickname: "sh Cho222", image: faker.image.avatar() },
-  { id: "leoturtle", nickname: "leo", image: faker.image.avatar() },
+  { id: "shcho333", nickname: "sh Cho333", image: faker.image.avatar() },
+  { id: "shcho444", nickname: "sh Cho444", image: faker.image.avatar() },
+  { id: "shcho555", nickname: "sh Cho555", image: faker.image.avatar() },
 ];
 
 export const handlers = [

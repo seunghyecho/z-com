@@ -1,17 +1,16 @@
+import { Trend } from "@/model/Trend";
 import { StyledTrend } from "./Trend.style";
 
-export interface TrendProps {
-  post: string;
-  title: string;
-  count: number;
+interface TrendProps {
+  trend: Trend;
 }
-export default function Trend({ post, title, count }: TrendProps) {
+export default function Trend({ trend }: TrendProps) {
   return (
-    <StyledTrend href={`/search?q=trend`} className="container">
-      <div className="count">{post}</div>
-      <div className="title">{title}</div>
+    <StyledTrend href={`/search?q=${trend.title}`} className="container">
+      <div className="count">{trend.post}</div>
+      <div className="title">{trend.title}</div>
       <div className="posts">
-        {count} <span>posts</span>
+        {trend.count.toLocaleString()} <span>posts</span>
       </div>
     </StyledTrend>
   );
