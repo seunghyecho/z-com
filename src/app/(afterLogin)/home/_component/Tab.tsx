@@ -4,12 +4,6 @@ import { useContext } from "react";
 import { StyledTab } from "./Tab.style";
 import { TabContext } from "@/app/(afterLogin)/home/_component/TabProvider";
 
-export const me = {
-  id: "shcho",
-  nickname: "shcho",
-  image: "",
-};
-
 export default function Tab() {
   const { tab, setTab } = useContext(TabContext);
 
@@ -19,6 +13,7 @@ export default function Tab() {
   const onClickFollowing = () => {
     setTab("following");
   };
+
   return (
     <StyledTab>
       <div className="homeFixed">

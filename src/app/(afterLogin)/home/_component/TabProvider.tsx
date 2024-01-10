@@ -11,7 +11,7 @@ interface TabProviderProps {
   children: ReactNode;
 }
 export default function TabProvider({ children }: TabProviderProps) {
-  const [tab, setTab] = useState("");
+  const [tab, setTab] = useState("recommend");
   return (
     <TabContext.Provider value={{ tab, setTab }}>
       {children}
