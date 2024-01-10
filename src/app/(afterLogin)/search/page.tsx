@@ -11,7 +11,7 @@ interface SearchProps {
 }
 export default function Search({ searchParams }: SearchProps) {
   return (
-    <StyledSearch>
+    <StyledSearch className="main">
       <div className="searchTop">
         <div className="searchZone">
           <div className="buttonZone">

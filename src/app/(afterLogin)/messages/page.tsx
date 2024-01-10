@@ -6,7 +6,7 @@ import Room from "./_component/Room";
 
 export default function Home() {
   return (
-    <StyledMessages>
+    <StyledMessages className="main">
       <div className="header">
         <h3>Message</h3>
       </div>

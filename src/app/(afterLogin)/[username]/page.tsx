@@ -1,43 +1,39 @@
-"use client";
+import {
+  QueryClient,
+  dehydrate,
+  HydrationBoundary,
+} from "@tanstack/react-query";
+import { getUser } from "@/app/(afterLogin)/[username]/_lib/getUser";
+import { getUserPosts } from "@/app/(afterLogin)/[username]/_lib/getUserPosts";
+import UserPosts from "@/app/(afterLogin)/[username]/_component/UserPosts";
+import UserInfo from "@/app/(afterLogin)/[username]/_component/UserInfo";
 
-import Image from "next/image";
-import { StyledProfile } from "./profile.style";
-import BackButton from "@/app/(afterLogin)/_component/BackButton";
-import Post from "@/app/(afterLogin)/_component/Post";
-import { useSession } from "next-auth/react";
-import { me } from "@/app/const/common";
-import { useRouter } from "next/navigation";
+interface ProfileProps {
+  params: { username: string };
+}
+export default async function Profile({ params }: ProfileProps) {
+  const { username } = params;
 
-export default function Profile() {
-  const router = useRouter();
-  const { data: session } = useSession();
+  const queryClient = new QueryClient();
 
-  const onClickFollow = () => {
-    if (!session?.user) {
-      router.replace("/login");
-    }
-  };
+  await queryClient.prefetchQuery({
+    queryKey: ["users", username],
+    queryFn: getUser,
+  });
+  await queryClient.prefetchQuery({
+    queryKey: ["posts", "users", username],
+    queryFn: getUserPosts,
+  });
+
+  const dehydratedState = dehydrate(queryClient);
+
   return (
-    <StyledProfile>
-      <div className="header">
-        <BackButton />
-        <h3 className="headerTitle">{me.nickname}</h3>
-      </div>
-      <div className="userZone">
-        <div className="userImage">
-          <img src={me.image.src} alt={me.id} />
-        </div>
-        <div className="userName">
-          <h2>{me.nickname}</h2>
-          <div>@{me.id}</div>
-        </div>
-
-        <button className="followButton" onClick={onClickFollow}>
-          Follow
-        </button>
-      </div>
-
-      <Post />
-    </StyledProfile>
+    <div className="main">
+      <HydrationBoundary state={dehydratedState}>
+        <UserInfo username={username} />
+        {/* @ts-expect-error */}
+        <UserPosts username={username} />
+      </HydrationBoundary>
+    </div>
   );
 }
