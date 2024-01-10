@@ -12,8 +12,11 @@ flex-direction: column;
 align-items: stretch;
 
 .searchTop {
-    backdrop-filter: blur(12px);
+    padding-top: 24px;
     position: fixed;
+    z-index: 1;
+    width: 598px;
+    backdrop-filter: blur(12px);
 
     .searchZone {
         display: flex;
@@ -21,12 +24,14 @@ align-items: stretch;
 
         .formZone {
             margin-left: 30px;
-            height: 53px;
+            height: 43px;
             width: 426px;
         }
     }
 }
 
 
-
+.list {
+    margin-top: 130px;
+}
 `;

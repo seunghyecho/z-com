@@ -6,7 +6,6 @@ width: 600px;
 .formZone {
     padding: 12px 16px;
     width: 566px;
-    height: 60px;
 }
 
 .trend {

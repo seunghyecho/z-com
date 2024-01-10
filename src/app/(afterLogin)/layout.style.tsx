@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
+
 export const StyledAfterLoginLayout = styled.div`
 display: flex;
 align-items: stretch;
 color: #000;
-
 
 .leftSectionWrapper {
     display: flex;
@@ -11,7 +11,6 @@ color: #000;
     flex-direction: column;
     flex-grow: 1;
 }
-
 .leftSection {
     width: 72px;
     height: 100dvh;
@@ -42,13 +41,11 @@ color: #000;
 .leftSectionFixed nav li {
     list-style-type: none;
 }
-
 .logo {
     display: inline-block;
     height: 56px;
     margin-top: 2px;
 }
-
 .logoPill {
     width: 50px;
     height: 50px;
@@ -81,7 +78,6 @@ color: #000;
     font-weight: 700;
     font-size: 17px;
 
-    
 }
 .postButton a span {
     display: none;
@@ -106,7 +102,6 @@ color: #000;
     }
 }
 
-
 .rightSectionWrapper {
     display: flex;
     align-items: flex-start;
@@ -116,6 +111,7 @@ color: #000;
 }
 .rightSection {
     display: none;
+    padding: 12px 16px;
 }
 .rightSectionInner {
     height: 100%;
@@ -138,7 +134,6 @@ color: #000;
     width: 600px;
     height: 200dvh;
 }
-
 .followRecommend {
     margin: 12px 0;
 }

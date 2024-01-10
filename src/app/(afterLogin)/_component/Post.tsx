@@ -2,14 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Post } from "@/model/Post";
 import { StyledPost } from "./Post.style";
 import ActionButton from "@/app/(afterLogin)/_component/ActionButton";
 import PostArticle from "@/app/(afterLogin)/_component/PostArticle";
 import PostImages from "@/app/(afterLogin)/_component/PostImages";
+
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko"; // 한국어 가져오기
-import { Post } from "@/model/Post";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");

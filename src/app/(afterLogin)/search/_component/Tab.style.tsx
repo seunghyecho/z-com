@@ -1,28 +1,12 @@
 import styled from "styled-components";
 
 export const StyledTab = styled.div`
-.main {
-    width: 600px;
-    border-color: rgb(239, 243, 244);
-    border-right-width: 1px;
-    border-left-width: 1px;
-    border-left-style: solid;
-    border-right-style: solid;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-
-&.homeFixed {
-    position: fixed;
-    z-index: 1;
-    width: 598px;
-    background-color: none;
-    backdrop-filter: blur(12px);
-    border-color: rgb(239, 243, 244);
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-}
+z-index: 1;
+width: 598px;
+backdrop-filter: blur(12px);
+border-color: rgb(239, 243, 244);
+border-bottom-width: 1px;
+border-bottom-style: solid;
 
 .homeTab {
     height: 53px;
@@ -53,7 +37,4 @@ export const StyledTab = styled.div`
     border-radius: 9999px;
 }
 
-.list {
-    margin-top: 110px;
-}
 `;

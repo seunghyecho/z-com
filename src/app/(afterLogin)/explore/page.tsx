@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Trend, { TrendProps } from "@/app/(afterLogin)/_component/Trend";
 import SearchForm from "@/app/(afterLogin)/_component/SearchForm";
+import Trend, { TrendProps } from "@/app/(afterLogin)/_component/Trend";
 import { StyledExplore } from "./explore.style";
 
 export default function Home() {
