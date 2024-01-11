@@ -1,23 +1,48 @@
-"use client";
-
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
 import BackButton from "@/app/(afterLogin)/_component/BackButton";
-import Post from "@/app/(afterLogin)/_component/Post";
-import { StyledSinglePost } from "./SinglePost.style";
-import CommentForm from "./_component/CommentForm";
+import CommentForm from "@/app/(afterLogin)/[username]/status/[id]/_component/CommentForm";
+import SinglePost from "@/app/(afterLogin)/[username]/status/[id]/_component/SinglePost";
+import Comments from "@/app/(afterLogin)/[username]/status/[id]/_component/Comments";
+import { getComments } from "@/app/(afterLogin)/[username]/status/[id]/_lib/getComments";
+import { getSinglePost } from "@/app/(afterLogin)/[username]/status/[id]/_lib/getSinglePost";
 
-export default function SinglePost() {
+interface Props {
+  params: { id: string };
+}
+export default async function Page({ params }: Props) {
+  const { id } = params;
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["posts", id],
+    queryFn: getSinglePost,
+  });
+  await queryClient.prefetchQuery({
+    queryKey: ["posts", id, "comments"],
+    queryFn: getComments,
+  });
+
+  const dehydratedState = dehydrate(queryClient);
+
   return (
-    <StyledSinglePost className="main">
-      <div className="header">
-        <BackButton />
-        <h3 className="headerTitle">게시하기</h3>
-      </div>
-      <Post />
-      <CommentForm />
-      <div>
-        {/* 게시글에 대한 답글 */}
-        <Post />
-      </div>
-    </StyledSinglePost>
+    <div className="main">
+      <HydrationBoundary state={dehydratedState}>
+        <div className="header">
+          <BackButton />
+          <h3 className="headerTitle">username/status/:id 게시하기</h3>
+        </div>
+        <SinglePost id={id} />
+        {/* @ts-expect-error */}
+        <CommentForm />
+
+        <div>
+          {/* @ts-expect-error */}
+          <Comments id={id} />
+        </div>
+      </HydrationBoundary>
+    </div>
   );
 }
