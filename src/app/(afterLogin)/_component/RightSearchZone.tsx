@@ -1,15 +1,39 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-
+import {
+  ReadonlyURLSearchParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
+import SearchForm from "@/app/(afterLogin)/_component/SearchForm";
 import { StyledRightSearchZone } from "./RightSearchZone.style";
 
-import SearchForm from "@/app/(afterLogin)/_component/SearchForm";
-
 export default function RightSearchZone() {
-  const pathname = usePathname();
-  const onChangeAll = () => {};
-  const onChangeFollow = () => {};
+  const router = useRouter();
+  const pathname: string = usePathname();
+  const searchParams: ReadonlyURLSearchParams = useSearchParams();
+
+  const onChangeFollow = () => {
+    // let url = `/search?q=${searchParams.get("q")}&pf=on`;
+    // if (searchParams.has("f")) {
+    //   url += `&f=${searchParams.get("f")}`;
+    // }
+
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("pf", "on");
+    router.replace(`/search?${newSearchParams.toString()}`);
+  };
+  const onChangeAll = () => {
+    // let url = `/search?q=${searchParams.get("q")}`;
+    // if (searchParams.has("f")) {
+    //   url += `&f=${searchParams.get("f")}`;
+    // }
+
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.delete("pf");
+    router.replace(`/search?${newSearchParams.toString()}`);
+  };
 
   if (pathname === "/explore") {
     return null;
@@ -43,6 +67,7 @@ export default function RightSearchZone() {
             </div>
           </div>
 
+          {/*  
           <div>
             <label className="filterLabel">Location</label>
             <div className="radio">
@@ -66,6 +91,7 @@ export default function RightSearchZone() {
               />
             </div>
           </div>
+            */}
         </div>
       </StyledRightSearchZone>
     );

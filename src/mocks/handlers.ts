@@ -13,30 +13,23 @@ function generateDate() {
 }
 
 const User = [
-  { id: "shcho111", nickname: "sh Cho111", image: faker.image.avatar() },
-  { id: "shcho222", nickname: "sh Cho222", image: faker.image.avatar() },
-  { id: "shcho333", nickname: "sh Cho333", image: faker.image.avatar() },
-  { id: "shcho444", nickname: "sh Cho444", image: faker.image.avatar() },
-  { id: "shcho555", nickname: "sh Cho555", image: faker.image.avatar() },
+  { id: "shCho", nickname: "shCho", image: faker.image.avatar() },
+  { id: "shCho111", nickname: "sh Cho111", image: faker.image.avatar() },
+  { id: "shCho222", nickname: "sh Cho222", image: faker.image.avatar() },
+  { id: "shCho333", nickname: "sh Cho333", image: faker.image.avatar() },
+  { id: "shCho444", nickname: "sh Cho444", image: faker.image.avatar() },
+  { id: "shCho555", nickname: "sh Cho555", image: faker.image.avatar() },
 ];
 
 export const handlers = [
   http.post("/api/login", () => {
     console.log("login :");
     // return 응답
-    return HttpResponse.json(
-      {
-        userId: 1,
-        nickname: "shcho",
-        id: "shcho",
-        image: "/next.svg",
+    return HttpResponse.json(HttpResponse.json(User[0]), {
+      headers: {
+        "Set-Cookie": "connect.sid=msw-cookie;HttpOnly;Path=/",
       },
-      {
-        headers: {
-          "Set-Cookie": "connect.sid=msw-cookie;HttpOnly;Path=/",
-        },
-      }
-    );
+    });
   }),
 
   http.post("/api/logout", () => {
