@@ -35,11 +35,9 @@ export default async function Page({ params }: Props) {
           <h3 className="headerTitle">username/status/:id 게시하기</h3>
         </div>
         <SinglePost id={id} />
-        {/* @ts-expect-error */}
         <CommentForm />
 
         <div>
-          {/* @ts-expect-error */}
           <Comments id={id} />
         </div>
       </HydrationBoundary>

@@ -7,8 +7,9 @@ import { getSinglePost } from "@/app/(afterLogin)/[username]/status/[id]/_lib/ge
 
 interface UserPostsProps {
   id: string;
+  noImage?: boolean;
 }
-export default function SinglePost({ id }: UserPostsProps) {
+export default function SinglePost({ id, noImage }: UserPostsProps) {
   const { data: post, error } = useQuery<
     IPost,
     Object,
@@ -22,10 +23,7 @@ export default function SinglePost({ id }: UserPostsProps) {
   });
 
   if (error) return <div>No Data</div>;
-  if (!post) return null;
+  if (!post) return <div>Loading...</div>;
 
-  return (
-    /* @ts-expect-error */
-    <Post key={post.postId} post={post} />
-  );
+  return <Post key={post.postId} post={post} noImage={noImage} />;
 }

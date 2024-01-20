@@ -1,43 +1,43 @@
-"use client";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import ImageZone from "@/app/(afterLogin)/@modal/[username]/status/[id]/photo/[photoId]/_component/ImageZone";
+import PhotoModalCloseButton from "@/app/(afterLogin)/@modal/[username]/status/[id]/photo/[photoId]/_component/PhotoModalCloseButton";
+import { getComments } from "@/app/(afterLogin)/[username]/status/[id]/_lib/getComments";
+import { getSinglePost } from "@/app/(afterLogin)/[username]/status/[id]/_lib/getSinglePost";
+import CommentZone from "./_component/CommentZone";
 
-import Post from "@/app/(afterLogin)/_component/Post";
-import ActionButton from "@/app/(afterLogin)/_component/ActionButton";
-import CommentForm from "@/app/(afterLogin)/[username]/status/[id]/_component/CommentForm";
-import PhotoModalCloseButton from "./_component/PhotoModalCloseButton";
-
-import { StyledPhotoModal } from "./photoModal.style";
-import { photo } from "@/app/const/common";
-
-interface PhotoModalProps {
+interface Props {
   params: {
     id: string;
-    username: string;
-    photoId: string;
   };
 }
 
 // 현재 페이지 : http://localhost:3000/shcho/status/1/photo/1
 
-export default function PhotoModal({ params }: PhotoModalProps) {
+export default async function Page({ params }: Props) {
+  const { id } = params;
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["posts", id],
+    queryFn: getSinglePost,
+  });
+  await queryClient.prefetchQuery({
+    queryKey: ["posts", id, "comments"],
+    queryFn: getComments,
+  });
+
+  const dehydratedState = dehydrate(queryClient);
+
   return (
-    <StyledPhotoModal className="container">
-      <PhotoModalCloseButton />
-      <div className="imageZone">
-        <img src={photo.link} alt={photo.Post?.content} />
-        <div
-          className="image"
-          style={{ backgroundImage: `url(${photo.link})` }}
-        />
-        <div className="buttonZone">
-          <div className="buttonInner">
-            <ActionButton white />
-          </div>
-        </div>
-      </div>
-      <div className="commentZone">
-        <Post noImage />
-        <CommentForm />
-      </div>
-    </StyledPhotoModal>
+    <div className="container photomodal">
+      <HydrationBoundary state={dehydratedState}>
+        <PhotoModalCloseButton />
+        <ImageZone id={id} />
+        <CommentZone id={id} />
+      </HydrationBoundary>
+    </div>
   );
 }

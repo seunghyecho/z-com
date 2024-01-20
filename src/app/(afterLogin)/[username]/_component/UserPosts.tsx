@@ -11,7 +11,6 @@ interface UserPostsProps {
 export default function UserPosts({ username }: UserPostsProps) {
   const queryClient = useQueryClient();
   const user = queryClient.getQueryData(["users", username]);
-
   const { data } = useQuery<
     IPost[],
     Object,
@@ -25,12 +24,8 @@ export default function UserPosts({ username }: UserPostsProps) {
   });
 
   if (user) {
-    return data?.map((post) => (
-      <>
-        {/* @ts-expect-error */}
-        <Post key={post.postId} post={post} />
-      </>
-    ));
+    return data?.map((post) => <Post key={post.postId} post={post} />);
   }
+  // post 가 없을 떄 답글 도 없는 경우
   return null;
 }

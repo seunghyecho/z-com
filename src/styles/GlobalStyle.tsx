@@ -4,6 +4,18 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
     ${reset}
     
+    .container.photomodal {
+        background: rgba(0, 0, 0, 0.95);
+        position: fixed;
+        z-index: 10;
+        left: 0;
+        top: 0;
+        width: 100dvw;
+        height: 100dvh;
+        display: flex;
+        flex-direction: row;
+    }
+
     .main {
         width: 600px;
         border-color: rgb(239, 243, 244);

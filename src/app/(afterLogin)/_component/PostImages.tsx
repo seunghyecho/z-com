@@ -32,7 +32,9 @@ export default function PostImages({ post }: PostImagesProps) {
             backgroundImage: `url(${post.Images[0].link})`,
             backgroundSize: "contain",
           }}
-        />
+        >
+          <img src={post.Images[0]?.link} alt="" />
+        </Link>
       </StyledPostImages>
     );
   }

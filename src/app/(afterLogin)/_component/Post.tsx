@@ -22,7 +22,6 @@ interface PostProps {
 
 export default function Post({ noImage, post }: PostProps) {
   let target = post;
-  if (!post) return;
 
   return (
     <PostArticle post={target}>
@@ -47,7 +46,11 @@ export default function Post({ noImage, post }: PostProps) {
             </div>
             <div>{target.content}</div>
             <div className="postImageSection">
-              <PostImages post={target} />
+              {!noImage && (
+                <div>
+                  <PostImages post={target} />
+                </div>
+              )}
             </div>
             <ActionButton />
           </div>

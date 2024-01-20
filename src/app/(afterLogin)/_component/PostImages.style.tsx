@@ -12,8 +12,8 @@ color: ${(props) => props.theme.colors.black_2};
     overflow: hidden;
 }
 .postImageSection.oneImage {
-    max-height: 510px;
-    min-height: 384px;
+    /* max-height: 510px; */
+    /* min-height: 384px; */
     background-repeat: no-repeat;
 }
 .postImageSection img {

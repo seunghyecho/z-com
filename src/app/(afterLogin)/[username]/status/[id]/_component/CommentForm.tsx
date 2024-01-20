@@ -25,7 +25,7 @@ export default function CommentForm() {
 
   const onClickActionButton = () => {};
 
-  if (!session?.user) return;
+  if (!session?.user) return <></>;
 
   return (
     <StyledCommentForm className="postForm" onSubmit={onSubmit}>
