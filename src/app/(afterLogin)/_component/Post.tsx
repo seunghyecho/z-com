@@ -30,8 +30,8 @@ export default function Post({ noImage, post }: PostProps) {
           <div className="postUserSection">
             <Link href={target.User.id} className="postUserImage">
               <img src={target.User.image} alt={target.User.id} />
+              <div className="postShade" />
             </Link>
-            <div className="postShade" />
           </div>
           <div className="postBody">
             <div className="postMeta">

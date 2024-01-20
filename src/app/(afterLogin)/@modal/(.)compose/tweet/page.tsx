@@ -1,18 +1,24 @@
 "use client";
 
+import Image from "next/image";
 import { ChangeEventHandler, useEffect, useRef, useState } from "react";
 import { StyledTweetModal } from "./tweet.style";
 import { IoMdImages } from "react-icons/io";
 import { AiFillCloseCircle } from "react-icons/ai";
 
-import { me } from "@/app/const/common";
-import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 export default function TweetModal() {
+  const router = useRouter();
   const imageRef = useRef<HTMLInputElement>(null);
   const [content, setContent] = useState("");
+  const { data: me } = useSession();
 
   const onSubmit = () => {};
-  const onClickClose = () => {};
+  const onClickClose = () => {
+    router.back();
+  };
   const onClickUploadButton = () => {
     imageRef.current?.click();
   };
@@ -35,7 +41,10 @@ export default function TweetModal() {
             <div className="modalBody">
               <div className="postUserSection">
                 <div className="postUserImage">
-                  <img src={me.image.src} alt={me.nickname} />
+                  <img
+                    src={me?.user?.image as string}
+                    alt={me?.user?.email as string}
+                  />
                 </div>
               </div>
               <div className="inputDiv">

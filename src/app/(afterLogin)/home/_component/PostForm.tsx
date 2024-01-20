@@ -9,7 +9,8 @@ import { StyledPostForm } from "./PostForm.style";
 export default function PostForm({}) {
   const imageRef = useRef<HTMLInputElement>(null); // input useRef error로 인한 타입스크립트 처리
   const [content, setContent] = useState("");
-  const { data: session } = useSession();
+
+  const { data: me } = useSession();
 
   const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setContent(e.target.value);
@@ -25,16 +26,13 @@ export default function PostForm({}) {
 
   const onClickActionButton = () => {};
 
-  if (!session?.user) return;
+  if (!me?.user) return;
 
   return (
     <StyledPostForm className="postForm" onSubmit={onSubmit}>
       <div className="postUserSection">
         <div className="postUserImage">
-          <img
-            src={session?.user.image as string}
-            alt={session?.user.email as string}
-          />
+          <img src={me?.user.image as string} alt={me?.user.email as string} />
         </div>
       </div>
       <div className="postInputSection">

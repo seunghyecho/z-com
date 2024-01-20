@@ -5,11 +5,21 @@ import { useSession } from "next-auth/react";
 import { IoMdImage } from "react-icons/io";
 import { ChangeEventHandler, FormEventHandler, useRef, useState } from "react";
 import { StyledCommentForm } from "./CommentForm.style";
+import { useQueryClient } from "@tanstack/react-query";
 
-export default function CommentForm() {
+interface CommentFormProps {
+  id: string;
+}
+export default function CommentForm({ id }: CommentFormProps) {
   const imageRef = useRef<HTMLInputElement>(null); // input useRef error로 인한 타입스크립트 처리
   const [content, setContent] = useState("");
-  const { data: session } = useSession();
+
+  const queryClient = useQueryClient();
+  const post = queryClient.getQueryData(["posts", id]);
+
+  console.log("CommentForm", post, id);
+
+  const { data: me } = useSession();
 
   const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setContent(e.target.value);
@@ -25,15 +35,15 @@ export default function CommentForm() {
 
   const onClickActionButton = () => {};
 
-  if (!session?.user) return <></>;
+  if (!post) return null;
 
   return (
     <StyledCommentForm className="postForm" onSubmit={onSubmit}>
       <div className="postUserSection">
         <div className="postUserImage">
           <img
-            src={session?.user.image as string}
-            alt={session?.user.email as string}
+            src={me?.user?.image as string}
+            alt={me?.user?.email as string}
           />
         </div>
       </div>

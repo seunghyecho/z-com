@@ -11,11 +11,13 @@ import { PiEnvelopeSimpleDuotone } from "react-icons/pi";
 import { CgProfile } from "react-icons/cg";
 
 import { StyledNavMenu } from "./NavMenu.style";
-import { me } from "@/app/const/common";
+import { useSession } from "next-auth/react";
 
 export default function NavMenu() {
   const segment = useSelectedLayoutSegment(); //compose
   const segments = useSelectedLayoutSegments(); //compose/tweet
+
+  const { data: me } = useSession();
 
   return (
     <StyledNavMenu>
@@ -55,10 +57,14 @@ export default function NavMenu() {
       </li>
 
       <li>
-        <Link href={`/${me.id}`}>
+        <Link href={`/${me?.user?.email}`}>
           <div className="navPill">
             <CgProfile size={20} />
-            <div style={{ fontWeight: `${segment === me.id ? 600 : 400}` }}>
+            <div
+              style={{
+                fontWeight: `${segment === me?.user?.email ? 600 : 400}`,
+              }}
+            >
               Profile
             </div>
           </div>

@@ -12,7 +12,7 @@ export default function CommentZone({ id }: CommentZoneProps) {
   return (
     <StyledCommentZone className="commentZone">
       <SinglePost id={id} />
-      <CommentForm />
+      <CommentForm id={id} />
       {/* @ts-expect-error */}
       <Comments id={id} />
     </StyledCommentZone>
