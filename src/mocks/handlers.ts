@@ -56,47 +56,49 @@ export const handlers = [
     });
   }),
 
-  http.get("/api/postRecommends", () => {
+  http.get("/api/postRecommends", ({ request }) => {
+    const url = new URL(request.url);
+    const cursor = parseInt(url.searchParams.get("cursor") as string) || 0;
     return HttpResponse.json([
       {
-        postId: 1,
+        postId: cursor + 1,
         User: User[0],
-        content: `${1} Z.com is so marvelous. `,
+        content: `${cursor} Z.com is so marvelous. `,
         Images: [{ imageId: 1, link: faker.image.urlLoremFlickr() }],
         createdAt: generateDate(),
       },
       {
-        postId: 2,
+        postId: cursor + 2,
         User: User[0],
-        content: `${2} Z.com is so marvelous. `,
+        content: `${cursor} Z.com is so marvelous. `,
         Images: [{ imageId: 1, link: faker.image.urlLoremFlickr() }],
         createdAt: generateDate(),
       },
       {
-        postId: 3,
+        postId: cursor + 3,
         User: User[0],
-        content: `${3} Z.com is so marvelous. `,
+        content: `${cursor} Z.com is so marvelous. `,
         Images: [{ imageId: 1, link: faker.image.urlLoremFlickr() }],
         createdAt: generateDate(),
       },
       {
-        postId: 4,
+        postId: cursor + 4,
         User: User[0],
-        content: `${4} Z.com is so marvelous. `,
+        content: `${cursor} Z.com is so marvelous. `,
         Images: [{ imageId: 1, link: faker.image.urlLoremFlickr() }],
         createdAt: generateDate(),
       },
       {
-        postId: 5,
+        postId: cursor + 5,
         User: User[0],
-        content: `${5} Z.com is so marvelous. `,
+        content: `${cursor} Z.com is so marvelous. `,
         Images: [{ imageId: 1, link: faker.image.urlLoremFlickr() }],
         createdAt: generateDate(),
       },
       {
-        postId: 6,
+        postId: cursor + 6,
         User: User[0],
-        content: `${6} Z.com is so marvelous. `,
+        content: `${cursor + 6} Z.com is so marvelous. `,
         Images: [{ imageId: 1, link: faker.image.urlLoremFlickr() }],
         createdAt: generateDate(),
       },

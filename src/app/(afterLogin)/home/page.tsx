@@ -1,26 +1,23 @@
-import Tab from "@/app/(afterLogin)/home/_component/Tab";
-import TabProvider from "@/app/(afterLogin)/home/_component/TabProvider";
-import PostForm from "@/app/(afterLogin)/home/_component/PostForm";
 import {
   QueryClient,
   dehydrate,
   HydrationBoundary,
 } from "@tanstack/react-query";
+import Tab from "@/app/(afterLogin)/home/_component/Tab";
+import TabDecider from "@/app/(afterLogin)/home/_component/TabDecider";
+import TabProvider from "@/app/(afterLogin)/home/_component/TabProvider";
+import PostForm from "@/app/(afterLogin)/home/_component/PostForm";
 import { getPostRecommends } from "@/app/(afterLogin)/home/_lib/getPostRecommends";
-import PostRecommends from "@/app/(afterLogin)/home/_component/PostRecommends";
 
-import TabDecider from "./_component/TabDecider";
-
-/**
- * 메인 홈 페이지
- */
+/** 메인 (홈) */
 
 export default async function Home() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey: ["posts", "recommends"],
     queryFn: getPostRecommends,
+    initialPageParam: 0, // cursor 값
   });
 
   const dehydratedState = dehydrate(queryClient);
@@ -30,6 +27,7 @@ export default async function Home() {
       <HydrationBoundary state={dehydratedState}>
         <TabProvider>
           <Tab />
+          {/* @ts-expect-error */}
           <PostForm />
           <TabDecider />
         </TabProvider>
