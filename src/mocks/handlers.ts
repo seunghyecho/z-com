@@ -12,6 +12,11 @@ function generateDate() {
   });
 }
 
+const delay = (ms: number) =>
+  new Promise((res) => {
+    setTimeout(res, ms);
+  });
+
 const User = [
   { id: "shCho", nickname: "shCho", image: faker.image.avatar() },
   { id: "shCho111", nickname: "sh Cho111", image: faker.image.avatar() },
@@ -105,7 +110,8 @@ export const handlers = [
     ]);
   }),
 
-  http.get("/api/postFollowings", () => {
+  http.get("/api/postFollowings", async () => {
+    await delay(3000);
     return HttpResponse.json([
       {
         postId: 1,

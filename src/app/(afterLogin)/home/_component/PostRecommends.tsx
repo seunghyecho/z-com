@@ -2,13 +2,22 @@
 
 import React, { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
+import { InfiniteData, useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import Post from "@/app/(afterLogin)/_component/Post";
 import { getPostRecommends } from "@/app/(afterLogin)/home/_lib/getPostRecommends";
 import { Post as IPost } from "@/model/Post";
 
 export default function PostRecommends() {
-  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<
+  // isPending && isFetching 두개가 같음
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isPending,
+    isLoading,
+    isError,
+  } = useSuspenseInfiniteQuery<
     IPost[],
     Object,
     InfiniteData<IPost[]>,

@@ -1,37 +1,27 @@
-import {
-  QueryClient,
-  dehydrate,
-  HydrationBoundary,
-} from "@tanstack/react-query";
+import { Suspense } from "react";
+import Loading from "@/app/(afterLogin)/home/loading";
 import Tab from "@/app/(afterLogin)/home/_component/Tab";
-import TabDecider from "@/app/(afterLogin)/home/_component/TabDecider";
 import TabProvider from "@/app/(afterLogin)/home/_component/TabProvider";
 import PostForm from "@/app/(afterLogin)/home/_component/PostForm";
-import { getPostRecommends } from "@/app/(afterLogin)/home/_lib/getPostRecommends";
+import TabDeciderSuspense from "@/app/(afterLogin)/home/_component/TabDeciderSuspense";
 
-/** 메인 (홈) */
+/**
+ * 메인 (홈)
+ * page.tsx > loading.tsx
+ * Suspense > fallback
+ * react-query > isPending
+ */
 
-export default async function Home() {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchInfiniteQuery({
-    queryKey: ["posts", "recommends"],
-    queryFn: getPostRecommends,
-    initialPageParam: 0, // cursor 값
-  });
-
-  const dehydratedState = dehydrate(queryClient);
-
+export default function Home() {
   return (
     <main className="main">
-      <HydrationBoundary state={dehydratedState}>
-        <TabProvider>
-          <Tab />
-          {/* @ts-expect-error */}
-          <PostForm />
-          <TabDecider />
-        </TabProvider>
-      </HydrationBoundary>
+      <TabProvider>
+        <Tab />
+        <PostForm />
+        <Suspense fallback={<Loading />}>
+          <TabDeciderSuspense />
+        </Suspense>
+      </TabProvider>
     </main>
   );
 }
