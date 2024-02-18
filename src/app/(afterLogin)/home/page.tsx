@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-import Loading from "@/app/(afterLogin)/home/loading";
 import Tab from "@/app/(afterLogin)/home/_component/Tab";
 import TabProvider from "@/app/(afterLogin)/home/_component/TabProvider";
 import PostForm from "@/app/(afterLogin)/home/_component/PostForm";
@@ -20,9 +18,7 @@ export default async function Home() {
       <TabProvider>
         <Tab />
         <PostForm me={session} />
-        <Suspense fallback={<Loading />}>
-          <TabDeciderSuspense />
-        </Suspense>
+        <TabDeciderSuspense />
       </TabProvider>
     </main>
   );

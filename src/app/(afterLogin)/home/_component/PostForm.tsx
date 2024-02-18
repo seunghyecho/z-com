@@ -23,7 +23,7 @@ type Props = {
   me: Session | null;
 };
 
-export default function PostForm({ me }: Props) {
+export default function PostForm({ me }: Props): JSX.Element {
   const imageRef = useRef<HTMLInputElement>(null); // input useRef error로 인한 타입스크립트 처리
   const [content, setContent] = useState("");
   const [preview, setPreview] = useState<
@@ -121,7 +121,7 @@ export default function PostForm({ me }: Props) {
     }
   };
 
-  if (!me?.user) return;
+  if (!me?.user) return <></>;
 
   return (
     <StyledPostForm className="postForm" onSubmit={mutation.mutate}>

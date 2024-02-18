@@ -2,9 +2,9 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import BackButton from "@/app/(beforeLogin)/_component/BackButton";
-import onSubmit from "@/app/(beforeLogin)/_lib/signup";
 
 import { StyledSignupModal } from "./SignupModal.style";
+import onSubmit from "../_lib/signup";
 
 function showMessage(message: string | undefined) {
   if (message === "no_id") {
@@ -26,12 +26,13 @@ function showMessage(message: string | undefined) {
   return "";
 }
 export default function SignupModal() {
-  // @ts-ignore
-  const [state, formAction] = useFormState(onSubmit, { message: null });
+  const [state, formAction] = useFormState(onSubmit, { message: "" });
   const { pending } = useFormStatus();
 
+  console.log("SignupModal state", state);
+
   return (
-    <StyledSignupModal>
+    <div id="signupModal">
       <div className="modalBackground">
         <div className="modal">
           <div className="modalHeader">
@@ -107,6 +108,6 @@ export default function SignupModal() {
           </form>
         </div>
       </div>
-    </StyledSignupModal>
+    </div>
   );
 }

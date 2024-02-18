@@ -1,19 +1,12 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
-
+import { MdOutlinePostAdd } from "react-icons/md";
 import NavMenu from "@/app/(afterLogin)/_component/NavMenu";
 import LogoutButton from "@/app/(afterLogin)/_component/LogoutButton";
 import TrendSection from "@/app/(afterLogin)/_component/TrendSection";
 import FollowRecommend from "@/app/(afterLogin)/_component/FollowRecommend";
 import RightSearchZone from "@/app/(afterLogin)/_component/RightSearchZone";
-import { MdOutlinePostAdd } from "react-icons/md";
-
-import { StyledAfterLoginLayout } from "./layout.style";
 import { auth } from "@/auth"; // server component 에서
-// import { useSession } from "next-auth/react"; // client component 에서
 import RQProvider from "./_component/RQProvider";
 interface AfterLoginLayoutProps {
   children: React.ReactNode;
@@ -24,11 +17,10 @@ export default async function AfterLoginLayout({
   children,
   modal,
 }: AfterLoginLayoutProps) {
-  const segment = useSelectedLayoutSegment();
   const session = await auth(); //authjs.session-token
 
   return (
-    <StyledAfterLoginLayout className="container">
+    <div className="afterLoginLayout container">
       <header className="leftSectionWrapper">
         <section className="leftSection">
           <div className="leftSectionWrapper">
@@ -73,6 +65,6 @@ export default async function AfterLoginLayout({
         </div>
         {modal}
       </RQProvider>
-    </StyledAfterLoginLayout>
+    </div>
   );
 }
