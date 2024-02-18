@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { NextResponse } from "next/server";
+import cookie from "cookie";
 
 export const {
   handlers: { GET, POST },
@@ -37,12 +38,12 @@ export const {
         });
 
         console.log("authResponse", authResponse);
-        // let setCookie = authResponse.headers.get("Set-Cookie");
-        // console.log("set-cookie", setCookie);
-        // if (setCookie) {
-        //   const parsed = cookie.parse(setCookie);
-        //   cookies().set("connect.sid", parsed["connect.sid"], parsed); // 브라우저에 쿠키를 심어주는 것
-        // }
+        let setCookie = authResponse.headers.get("Set-Cookie"); // 백엔드 서버의 쿠키를 받아서
+        console.log("set-cookie", setCookie);
+        if (setCookie) {
+          const parsed = cookie.parse(setCookie);
+          cookies().set("connect.sid", parsed["connect.sid"], parsed); // 브라우저에 쿠키를 심어주는 것, 프론트 서버에 로그인 쿠키를 심으면 개인정보 유출
+        }
 
         // 로그인 실패
         if (!authResponse.ok) {
