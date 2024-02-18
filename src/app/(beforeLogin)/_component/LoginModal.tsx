@@ -16,6 +16,7 @@ export default function LoginModal() {
     e.preventDefault();
     setMessage("");
     try {
+      // 로그인 : client 처리
       const response = await signIn("credentials", {
         username: id,
         password,

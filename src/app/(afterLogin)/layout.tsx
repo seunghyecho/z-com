@@ -12,21 +12,20 @@ import RightSearchZone from "@/app/(afterLogin)/_component/RightSearchZone";
 import { MdOutlinePostAdd } from "react-icons/md";
 
 import { StyledAfterLoginLayout } from "./layout.style";
-// import { auth } from "@/auth"; // server component 에서
-import { useSession } from "next-auth/react"; // client component 에서
+import { auth } from "@/auth"; // server component 에서
+// import { useSession } from "next-auth/react"; // client component 에서
 import RQProvider from "./_component/RQProvider";
 interface AfterLoginLayoutProps {
   children: React.ReactNode;
   modal: React.ReactNode;
 }
 
-export default function AfterLoginLayout({
+export default async function AfterLoginLayout({
   children,
   modal,
 }: AfterLoginLayoutProps) {
   const segment = useSelectedLayoutSegment();
-  // const session = await auth();
-  const { data: session } = useSession();
+  const session = await auth(); //authjs.session-token
 
   return (
     <StyledAfterLoginLayout className="container">
@@ -53,7 +52,7 @@ export default function AfterLoginLayout({
                     </Link>
                   </div>
 
-                  <LogoutButton />
+                  <LogoutButton me={session} />
                 </nav>
               )}
             </div>

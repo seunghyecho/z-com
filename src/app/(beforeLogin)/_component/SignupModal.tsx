@@ -38,6 +38,7 @@ export default function SignupModal() {
             <BackButton />
             <div>Create New Account.</div>
           </div>
+          {/* 회원가입 : server 처리 */}
           <form action={formAction}>
             <div className="modalBody">
               <div className="inputDiv">

@@ -1,16 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { StyledLogoutButton } from "./LogoutButton.style";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Session } from "@auth/core/types";
+import { StyledLogoutButton } from "./LogoutButton.style";
+interface LogoutButtonProps {
+  me: Session;
+}
 
-interface LogoutButtonProps {}
-
-export default function LogoutButton({}: LogoutButtonProps) {
+export default function LogoutButton({ me }: LogoutButtonProps) {
   const router = useRouter();
 
-  const { data: me } = useSession();
   const onLogout = () => {
     signOut({ redirect: false }).then(() => {
       router.replace("/");

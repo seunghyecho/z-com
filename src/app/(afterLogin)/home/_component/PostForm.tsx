@@ -3,14 +3,16 @@
 import Image from "next/image";
 import { ChangeEventHandler, FormEventHandler, useRef, useState } from "react";
 import { IoMdImages } from "react-icons/io";
-import { useSession } from "next-auth/react";
+import { Session } from "@auth/core/types";
 import { StyledPostForm } from "./PostForm.style";
 
-export default function PostForm({}) {
+type Props = {
+  me: Session | null;
+};
+
+export default function PostForm({ me }: Props) {
   const imageRef = useRef<HTMLInputElement>(null); // input useRef error로 인한 타입스크립트 처리
   const [content, setContent] = useState("");
-
-  const { data: me } = useSession();
 
   const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setContent(e.target.value);

@@ -4,6 +4,7 @@ import Tab from "@/app/(afterLogin)/home/_component/Tab";
 import TabProvider from "@/app/(afterLogin)/home/_component/TabProvider";
 import PostForm from "@/app/(afterLogin)/home/_component/PostForm";
 import TabDeciderSuspense from "@/app/(afterLogin)/home/_component/TabDeciderSuspense";
+import { auth } from "@/auth";
 
 /**
  * 메인 (홈)
@@ -12,12 +13,13 @@ import TabDeciderSuspense from "@/app/(afterLogin)/home/_component/TabDeciderSus
  * react-query > isPending
  */
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
   return (
     <main className="main">
       <TabProvider>
         <Tab />
-        <PostForm />
+        <PostForm me={session} />
         <Suspense fallback={<Loading />}>
           <TabDeciderSuspense />
         </Suspense>

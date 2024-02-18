@@ -33,6 +33,9 @@ export default async (
     return { message: "no_image" };
   }
 
+  // nickname 추가
+  formData.set("nickname", formData.get("name") as string);
+
   let shouldRedirect = false;
 
   try {
@@ -41,7 +44,7 @@ export default async (
       {
         method: "post",
         body: formData,
-        credentials: "include",
+        credentials: "include", // 세션 쿠키 브라우저에 전달
       }
     );
 
