@@ -1,8 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { NextResponse } from "next/server";
-import cookie from "cookie";
 import { cookies } from "next/headers";
+import cookie from "cookie";
 
 export const {
   handlers: { GET, POST },
@@ -13,50 +12,70 @@ export const {
     signIn: "/i/flow/login",
     newUser: "/i/flow/signup",
   },
-  // middleware.ts 로 대체
-  //
-  // callbacks: {
-  //   async authorized({ request, auth }) {
-  //     if (!auth) {
-  //       return NextResponse.redirect(`http://localhost:3000/i/flow/login`);
-  //     }
-  //     return true;
-  //   },
-  // },
+  callbacks: {
+    jwt({ token }) {
+      console.log("auth.ts jwt", token);
+      return token;
+    },
+    session({ session, newSession, user }) {
+      console.log("auth.ts session", session, newSession, user);
+      return session;
+    },
+  },
+  events: {
+    signOut(data) {
+      console.log(
+        "auth.ts events signout",
+        "session" in data && data.session,
+        "token" in data && data.token
+      );
+      // if ('session' in data) {
+      //   data.session = null;
+      // }
+      // if ('token' in data) {
+      //   data.token = null;
+      // }
+    },
+    session(data) {
+      console.log(
+        "auth.ts events session",
+        "session" in data && data.session,
+        "token" in data && data.token
+      );
+    },
+  },
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
-        console.log("credentials", credentials);
-        const authResponse = await fetch(`${process.env.AUTH_URL}/api/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: credentials.username,
-            password: credentials.password,
-          }),
-        });
-
+        const authResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/login`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: credentials.username,
+              password: credentials.password,
+            }),
+          }
+        );
         console.log("authResponse", authResponse);
-        let setCookie = authResponse.headers.get("Set-Cookie"); // 백엔드 서버의 쿠키를 받아서
+        let setCookie = authResponse.headers.get("Set-Cookie");
         console.log("set-cookie", setCookie);
         if (setCookie) {
           const parsed = cookie.parse(setCookie);
-          cookies().set("connect.sid", parsed["connect.sid"], parsed); // 브라우저에 쿠키를 심어주는 것, 프론트 서버에 로그인 쿠키를 심으면 개인정보 유출
+          cookies().set("connect.sid", parsed["connect.sid"], parsed); // 브라우저에 쿠키를 심어주는 것
         }
-
-        // 로그인 실패
         if (!authResponse.ok) {
           return null;
         }
 
-        // 로그인 성공
         const user = await authResponse.json();
         console.log("user", user);
         return {
           email: user.id,
-          name: user.nickname, // 닉네임 값 우회
+          name: user.nickname,
           image: user.image,
           ...user,
         };

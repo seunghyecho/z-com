@@ -25,7 +25,7 @@ export default async (prevState: any, formData: FormData) => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/users`,
       {
-        method: "post",
+        method: "POST",
         body: formData,
         credentials: "include",
       }
@@ -34,7 +34,9 @@ export default async (prevState: any, formData: FormData) => {
     if (response.status === 403) {
       return { message: "user_exists" };
     }
+
     console.log(await response.json());
+
     shouldRedirect = true;
     await signIn("credentials", {
       username: formData.get("id"),

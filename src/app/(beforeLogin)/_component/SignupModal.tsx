@@ -103,7 +103,7 @@ export default function SignupModal() {
               <button className="actionButton" type="submit" disabled={pending}>
                 signup
               </button>
-              <div className="error">{showMessage(state?.message)}</div>
+              <div className="error">{showMessage(state?.message || "")}</div>
             </div>
           </form>
         </div>
