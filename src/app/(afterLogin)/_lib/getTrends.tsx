@@ -3,6 +3,7 @@ export async function getTrends() {
     next: {
       tags: ["trends"],
     },
+    credentials: "include", // 403 요청 실패 시, 쿠키 필요
     cache: "no-store",
   });
   if (!res.ok) {

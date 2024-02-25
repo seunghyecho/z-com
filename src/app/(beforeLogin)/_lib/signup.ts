@@ -27,7 +27,7 @@ export default async (prevState: any, formData: FormData) => {
       {
         method: "POST",
         body: formData,
-        credentials: "include",
+        credentials: "include", // 세션 쿠키가 브라우저에 등록
       }
     );
     console.log(response.status);

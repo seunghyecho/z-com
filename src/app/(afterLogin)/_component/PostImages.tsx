@@ -24,10 +24,9 @@ export default function PostImages({ post }: PostImagesProps) {
 
   if (post.Images.length === 1) {
     return (
-      <StyledPostImages>
+      <StyledPostImages className="postImageSection oneImage">
         <Link
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
-          className="postImageSection oneImage"
           style={{
             backgroundImage: `url(${post.Images[0].link})`,
             backgroundSize: "contain",
@@ -44,18 +43,22 @@ export default function PostImages({ post }: PostImagesProps) {
         <Link
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
           style={{
-            backgroundImage: `url(${post.Images[0].link})`,
+            backgroundImage: `url(${post.Images[0]?.link})`,
             backgroundSize: "cover",
           }}
-        />
+        >
+          <img src={post.Images[0]?.link} alt="" />
+        </Link>
 
         <Link
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[1].imageId}`}
           style={{
-            backgroundImage: `url(${post.Images[1].link})`,
+            backgroundImage: `url(${post.Images[1]?.link})`,
             backgroundSize: "cover",
           }}
-        />
+        >
+          <img src={post.Images[1]?.link} alt="" />
+        </Link>
       </StyledPostImages>
     );
   }

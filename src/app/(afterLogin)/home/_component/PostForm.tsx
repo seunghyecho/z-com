@@ -6,6 +6,7 @@ import {
   ChangeEventHandler,
   FormEvent,
   FormEventHandler,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -30,6 +31,7 @@ export default function PostForm({ me }: Props): JSX.Element {
     Array<{ dataUrl: string; file: File } | null>
   >([]);
   const queryclient = useQueryClient();
+
   const mutation = useMutation({
     mutationFn: async (e: FormEvent) => {
       e.preventDefault();
@@ -50,12 +52,13 @@ export default function PostForm({ me }: Props): JSX.Element {
       return 123;
     },
     onSuccess: async (response, variable, context) => {
-      const newPost = await response.json();
+      const newPost = await response?.json();
       setContent("");
       setPreview([]);
+
       if (queryclient.getQueryData(["posts", "recommends"])) {
         queryclient.setQueryData(["posts", "recommends"], (prevData: any) => {
-          // 리액트의 불변성 법칙
+          // 리액트의 불변성 법칙, 첫 페이지의 첫 게시글로 노출
           const shallow = {
             ...prevData,
             pages: [...prevData.pages],
@@ -90,9 +93,8 @@ export default function PostForm({ me }: Props): JSX.Element {
     imageRef.current?.click(); // current가 null 일 경우 ? 예외 처리
   };
 
-  const onClickActionButton = () => {};
-
-  const onRemoveFiles = (index: number) => {
+  const onRemoveFiles = (e: any, index: number) => {
+    e.stopPropagation();
     setPreview((prevPreview) => {
       const prev = [...prevPreview];
       prev[index] = null;
@@ -103,16 +105,21 @@ export default function PostForm({ me }: Props): JSX.Element {
     e: ChangeEvent<HTMLInputElement>
   ): void => {
     e.preventDefault();
+    e.stopPropagation();
+
     if (e.target.files) {
       Array.from(e.target.files).forEach((file: File, index: number) => {
         const reader = new FileReader();
-        reader.onloadend = () => {
+
+        reader.onload = () => {
           setPreview((prevPreviews) => {
             const prev = [...prevPreviews];
+
             prev[index] = {
               dataUrl: reader.result as string,
               file,
             };
+
             return prev;
           });
         };
@@ -130,6 +137,7 @@ export default function PostForm({ me }: Props): JSX.Element {
           <img src={me?.user.image as string} alt={me?.user.email as string} />
         </div>
       </div>
+
       <div className="postInputSection">
         <TextareaAutosize
           name=""
@@ -143,24 +151,24 @@ export default function PostForm({ me }: Props): JSX.Element {
             display: "flex",
           }}
         >
-          {preview?.map((p, index) => {
-            if (!p) return;
-            return (
-              <div onClick={onRemoveFiles(index) as any}>
-                <img
-                  key={index}
-                  src={p.dataUrl}
-                  alt={"Preview"}
-                  style={{
-                    width: "100%",
-                    objectFit: "contain",
-                    maxHeight: "100px",
-                  }}
-                />
-              </div>
-            );
-          })}
+          {preview.map(
+            (p, index) =>
+              p && (
+                <div onClick={(e) => onRemoveFiles(e, index)} key={index}>
+                  <img
+                    src={p.dataUrl}
+                    alt={"Preview"}
+                    style={{
+                      width: "100%",
+                      objectFit: "contain",
+                      maxHeight: "100px",
+                    }}
+                  />
+                </div>
+              )
+          )}
         </div>
+
         <div className="postButtonSection">
           <div className="footerButtons">
             <div className="footerButtonLeft">
@@ -172,11 +180,15 @@ export default function PostForm({ me }: Props): JSX.Element {
                 ref={imageRef}
                 onChange={onUploadFiles}
               />
-              <button className="uploadButton" onClick={onClickUploadButton}>
+              <button
+                className="uploadButton"
+                type="button"
+                onClick={onClickUploadButton}
+              >
                 <IoMdImages size={20} />
               </button>
             </div>
-            <button className="actionButton" onClick={onClickActionButton}>
+            <button className="actionButton" type="submit" disabled={!content}>
               Post
             </button>
           </div>
