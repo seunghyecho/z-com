@@ -7,13 +7,15 @@ import { RxAvatar } from "react-icons/rx";
 import BackButton from "@/app/(afterLogin)/_component/BackButton";
 import { getUser } from "@/app/(afterLogin)/[username]/_lib/getUser";
 import { User } from "@/model/User";
+import { Session } from "@auth/core/types";
 
 interface UserInfoProps {
   username: string;
+  session: Session | null;
 }
-export default function UserInfo({ username }: UserInfoProps) {
+export default function UserInfo({ username, session }: UserInfoProps) {
   const router = useRouter();
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   const {
     data: me,
     error,

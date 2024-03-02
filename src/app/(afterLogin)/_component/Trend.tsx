@@ -5,8 +5,12 @@ interface TrendProps {
   trend: Trend;
 }
 export default function Trend({ trend }: TrendProps) {
+  // 주소창 특수문자 변환 필요 :encodeURIComponent
   return (
-    <StyledTrend href={`/search?q=${trend.title}`} className="container">
+    <StyledTrend
+      href={`/search?q=${encodeURIComponent(trend.title)}`}
+      className="container"
+    >
       <div className="count">{trend.post}</div>
       <div className="title">{trend.title}</div>
       <div className="posts">

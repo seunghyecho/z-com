@@ -8,6 +8,7 @@ export async function getPostFollowings({ pageParam }: Props) {
       next: {
         tags: ["posts", "followings"],
       },
+      credentials: "include",
       cache: "no-store",
     }
   );
