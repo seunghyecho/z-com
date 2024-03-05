@@ -34,7 +34,7 @@ export default function ImageZone({ id }: ImageZoneProps) {
       />
       <div className="buttonZone">
         <div className="buttonInner">
-          <ActionButton white />
+          <ActionButton white post={post} />
         </div>
       </div>
     </StyledImageZone>
