@@ -36,13 +36,21 @@ h3 {
 
 .followButtonSection {
     button{
+        font-size: 12px;
         padding: 10px;
         width: 100%;
+        min-width: 80px;
         border: none;
-        border-radius: 8px;
+        border-radius: 30px;
         color: ${(props) => props.theme.colors.white_0};
         background: ${(props) => props.theme.colors.blue_0};
         cursor: pointer;
+
+        &.following{
+            color:${(props) => props.theme.colors.blue_2};
+            border: 1px solid ${(props) => props.theme.colors.blue_2};
+            background: none;
+        }
     }
 }
 

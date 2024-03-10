@@ -81,7 +81,7 @@
   padding: 0;
   margin: 0;
   font-family: NanumSquareNeo-Variable !important;
-  font-size: 14px !important;
+  font-size: 14px;
 }
 
 html,

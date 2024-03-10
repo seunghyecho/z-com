@@ -8,6 +8,8 @@ import FollowRecommend from "@/app/(afterLogin)/_component/FollowRecommend";
 import RightSearchZone from "@/app/(afterLogin)/_component/RightSearchZone";
 import { auth } from "@/auth"; // server component 에서
 import RQProvider from "./_component/RQProvider";
+import FollowRecommentSection from "./_component/FollowRecommendSection";
+
 interface AfterLoginLayoutProps {
   children: React.ReactNode;
   modal: React.ReactNode;
@@ -59,7 +61,7 @@ export default async function AfterLoginLayout({
             <section className="rightSection">
               <RightSearchZone />
               <TrendSection />
-              <FollowRecommend />
+              <FollowRecommentSection />
             </section>
           </div>
         </div>

@@ -80,25 +80,7 @@ export default function ActionButton({ white, post }: ActionButtonProps) {
               };
               queryClient.setQueryData(queryKey, shallow);
             }
-          }
-
-          // if (Array.isArray(value)) {
-          // const index = value.findIndex((p) => p.postId === postId); // 찾고자 하는 게시글
-          // if (index > -1) {
-          //   // 있으면
-          //   const shallow = [...value];
-          //   shallow[index] = {
-          //     ...shallow[index],
-          //     Hearts: [{ userId: session?.user?.email as string }],
-          //     _count: {
-          //       ...shallow[index]._count,
-          //       Hearts: shallow[index]._count.Hearts + 1,
-          //     },
-          //   };
-          //   queryClient.setQueryData(queryKey, shallow);
-          // }
-          // }
-          else if (value) {
+          } else if (value) {
             // single post
             if (value.postId === postId) {
               const shallow = {
@@ -117,6 +99,58 @@ export default function ActionButton({ white, post }: ActionButtonProps) {
     },
     onError() {
       // unheart의 mutate 함수로 롤백
+      const queryCache = queryClient.getQueryCache();
+      const queryKeys = queryCache.getAll().map((cache) => cache.queryKey);
+      console.log("queryKeys", queryKeys);
+      queryKeys.forEach((queryKey) => {
+        if (queryKey[0] === "posts") {
+          const value: Post | InfiniteData<Post[]> | undefined =
+            queryClient.getQueryData(queryKey);
+          if (value && "pages" in value) {
+            console.log("array", value);
+            const obj = value.pages.flat().find((v) => v.postId === postId);
+            if (obj) {
+              // 존재는 하는지
+              const pageIndex = value.pages.findIndex((page) =>
+                page.includes(obj)
+              );
+              const index = value.pages[pageIndex].findIndex(
+                (v) => v.postId === postId
+              );
+              console.log("found index", index);
+              const shallow = { ...value };
+              value.pages = { ...value.pages };
+              value.pages[pageIndex] = [...value.pages[pageIndex]];
+              shallow.pages[pageIndex][index] = {
+                ...shallow.pages[pageIndex][index],
+                Hearts: shallow.pages[pageIndex][index].Hearts.filter(
+                  (v) => v.userId !== session?.user?.email
+                ),
+                _count: {
+                  ...shallow.pages[pageIndex][index]._count,
+                  Hearts: shallow.pages[pageIndex][index]._count.Hearts - 1,
+                },
+              };
+              queryClient.setQueryData(queryKey, shallow);
+            }
+          } else if (value) {
+            // 싱글 포스트인 경우
+            if (value.postId === postId) {
+              const shallow = {
+                ...value,
+                Hearts: value.Hearts.filter(
+                  (v) => v.userId !== session?.user?.email
+                ),
+                _count: {
+                  ...value._count,
+                  Hearts: value._count.Hearts - 1,
+                },
+              };
+              queryClient.setQueryData(queryKey, shallow);
+            }
+          }
+        }
+      });
     },
     onSettled() {
       // 최종적으로 posts 쿼리키를 가진 쿼리들을  다시 가져와 (option)
@@ -174,27 +208,7 @@ export default function ActionButton({ white, post }: ActionButtonProps) {
               };
               queryClient.setQueryData(queryKey, shallow);
             }
-          }
-
-          // if (Array.isArray(value)) {
-          //   const index = value.findIndex((p) => p.postId === postId); // 찾고자 하는 게시글
-          //   if (index > -1) {
-          //     // 있으면, 유저 제거
-          //     const shallow = [...value];
-          //     shallow[index] = {
-          //       ...shallow[index],
-          //       Hearts: shallow[index].Hearts.filter(
-          //         (v) => v.userId !== (session?.user?.email as string)
-          //       ),
-          //       _count: {
-          //         ...shallow[index]._count,
-          //         Hearts: shallow[index]._count.Hearts - 1,
-          //       },
-          //     };
-          //     queryClient.setQueryData(queryKey, shallow);
-          //   }
-          // }
-          else if (value) {
+          } else if (value) {
             // single post, 유저 제거
             if (value.postId === postId) {
               const shallow = {
@@ -215,6 +229,55 @@ export default function ActionButton({ white, post }: ActionButtonProps) {
     },
     onError() {
       // heart 의 mutate 로 롤백
+      const queryCache = queryClient.getQueryCache();
+      const queryKeys = queryCache.getAll().map((cache) => cache.queryKey);
+      console.log("queryKeys", queryKeys);
+      queryKeys.forEach((queryKey) => {
+        if (queryKey[0] === "posts") {
+          console.log(queryKey[0]);
+          const value: Post | InfiniteData<Post[]> | undefined =
+            queryClient.getQueryData(queryKey);
+          if (value && "pages" in value) {
+            console.log("array", value);
+            const obj = value.pages.flat().find((v) => v.postId === postId);
+            if (obj) {
+              // 존재는 하는지
+              const pageIndex = value.pages.findIndex((page) =>
+                page.includes(obj)
+              );
+              const index = value.pages[pageIndex].findIndex(
+                (v) => v.postId === postId
+              );
+              console.log("found index", index);
+              const shallow = { ...value };
+              value.pages = { ...value.pages };
+              value.pages[pageIndex] = [...value.pages[pageIndex]];
+              shallow.pages[pageIndex][index] = {
+                ...shallow.pages[pageIndex][index],
+                Hearts: [{ userId: session?.user?.email as string }],
+                _count: {
+                  ...shallow.pages[pageIndex][index]._count,
+                  Hearts: shallow.pages[pageIndex][index]._count.Hearts + 1,
+                },
+              };
+              queryClient.setQueryData(queryKey, shallow);
+            }
+          } else if (value) {
+            // 싱글 포스트인 경우
+            if (value.postId === postId) {
+              const shallow = {
+                ...value,
+                Hearts: [{ userId: session?.user?.email as string }],
+                _count: {
+                  ...value._count,
+                  Hearts: value._count.Hearts + 1,
+                },
+              };
+              queryClient.setQueryData(queryKey, shallow);
+            }
+          }
+        }
+      });
     },
     onSettled() {},
   });
@@ -234,7 +297,7 @@ export default function ActionButton({ white, post }: ActionButtonProps) {
 
   return (
     <StyledActionButton className="actionButtons">
-      <CommentButton
+      <div
         className={`commentButton ${commented && "commented"} ${
           white && "white"
         }`}
@@ -246,9 +309,9 @@ export default function ActionButton({ white, post }: ActionButtonProps) {
             </g>
           </svg>
         </button>
-        <div className="count">{post._count.Comments || ""}</div>
-      </CommentButton>
-      <RepostButton
+        <div className="count">{post?._count?.Comments || ""}</div>
+      </div>
+      <div
         className={`repostButton ${reposted && "reposted"} ${white && "white"}`}
       >
         <button onClick={onClickRepost}>
@@ -258,12 +321,10 @@ export default function ActionButton({ white, post }: ActionButtonProps) {
             </g>
           </svg>
         </button>
-        <div className="count">{post._count.Reposts || ""}</div>
-      </RepostButton>
+        <div className="count">{post?._count?.Reposts || ""}</div>
+      </div>
 
-      <HeartButton
-        className={`heartButton ${liked && "liked"} ${white && "white"}`}
-      >
+      <div className={`heartButton ${liked && "liked"} ${white && "white"}`}>
         <button onClick={onClickHeart}>
           <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
             <g>
@@ -271,8 +332,8 @@ export default function ActionButton({ white, post }: ActionButtonProps) {
             </g>
           </svg>
         </button>
-        <div className="count">{post._count.Hearts || ""}</div>
-      </HeartButton>
+        <div className="count">{post?._count?.Hearts || ""}</div>
+      </div>
     </StyledActionButton>
   );
 }

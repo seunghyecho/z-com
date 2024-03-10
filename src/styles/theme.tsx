@@ -3,7 +3,7 @@ import { DefaultTheme } from "styled-components";
 const colors = {
   blue_0: "linear-gradient(114deg, #0038F5 0%, #9F03FF 100%)",
   blue_1: "rgb(29, 155, 240)",
-
+  blue_2: "#0038F5",
   gray_0: "rgb(29, 155, 240, 0.1)",
   gray_1: "rgb(29, 155, 240, 0.01)",
 
