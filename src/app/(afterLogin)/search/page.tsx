@@ -1,15 +1,24 @@
-"use client";
-
 import Tab from "@/app/(afterLogin)/search/_component/Tab";
 import BackButton from "@/app/(afterLogin)/_component/BackButton";
 import SearchForm from "@/app/(afterLogin)/_component/SearchForm";
 import SearchResult from "@/app/(afterLogin)/search/_component/SearchResult";
 import { StyledSearch } from "./search.style";
+import { Metadata } from "next";
 
-interface SearchProps {
+interface Props {
   searchParams: { q: string; f?: string; pf?: string };
 }
-export default function Search({ searchParams }: SearchProps) {
+
+// 동적 메타 데이터
+export async function generateMetadata({
+  searchParams,
+}: Props): Promise<Metadata> {
+  return {
+    title: `${searchParams.q} - Search / Z`,
+    description: `${searchParams.q} - Search / Z`,
+  };
+}
+export default function Search({ searchParams }: Props) {
   return (
     <StyledSearch className="main">
       <div className="searchTop">
@@ -24,6 +33,7 @@ export default function Search({ searchParams }: SearchProps) {
         <Tab />
       </div>
       <div className="list">
+        {/* @ts-expect-error */}
         <SearchResult searchParams={searchParams} />
       </div>
     </StyledSearch>

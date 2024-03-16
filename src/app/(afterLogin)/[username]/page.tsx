@@ -8,11 +8,21 @@ import { getUserPosts } from "@/app/(afterLogin)/[username]/_lib/getUserPosts";
 import UserPosts from "@/app/(afterLogin)/[username]/_component/UserPosts";
 import UserInfo from "@/app/(afterLogin)/[username]/_component/UserInfo";
 import { auth } from "@/auth";
+import { User } from "@/model/User";
 
-interface ProfileProps {
+interface Props {
   params: { username: string };
 }
-export default async function Profile({ params }: ProfileProps) {
+export async function generateMetadata({ params }: Props) {
+  const user: User = await getUserServer({
+    queryKey: ["users", params.username],
+  });
+  return {
+    title: `${user.nickname} (${user.id}) / Z`,
+    description: `${user.nickname} (${user.id}) Profile`,
+  };
+}
+export default async function Profile({ params }: Props) {
   const { username } = params;
   const session = await auth();
   const queryClient = new QueryClient();

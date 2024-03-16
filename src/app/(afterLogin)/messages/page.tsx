@@ -1,8 +1,11 @@
-"use client";
-
+import { Metadata } from "next";
 import { StyledMessages } from "./messages.style";
-
 import Room from "./_component/Room";
+
+export const metadata: Metadata = {
+  title: "Message / Z",
+  description: "Send Message.",
+};
 
 export default function Home() {
   return (

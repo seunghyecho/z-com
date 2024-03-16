@@ -1,6 +1,7 @@
 import { Post } from "@/model/Post";
 import { QueryFunction } from "@tanstack/react-query";
-export const getSinglePost = async ({
+import { cookies } from "next/headers";
+export const getSinglePostServer = async ({
   queryKey,
 }: {
   queryKey: [string, string];
@@ -11,6 +12,7 @@ export const getSinglePost = async ({
       tags: ["posts", id],
     },
     credentials: "include",
+    headers: { Cookie: cookies().toString() }, // 서버에서도 브라우저에 쿠키 전달
     // cache: "no-store", 새로고침해도 같은 데이터를 가지고 옴.
   });
 
