@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 export default function Home() {
   return (
-    <div id="explore">
+    <div id="explore" className="main">
       <div className="formZone">
         <SearchForm />
       </div>

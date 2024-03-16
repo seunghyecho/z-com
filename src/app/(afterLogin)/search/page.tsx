@@ -2,7 +2,6 @@ import Tab from "@/app/(afterLogin)/search/_component/Tab";
 import BackButton from "@/app/(afterLogin)/_component/BackButton";
 import SearchForm from "@/app/(afterLogin)/_component/SearchForm";
 import SearchResult from "@/app/(afterLogin)/search/_component/SearchResult";
-import { StyledSearch } from "./search.style";
 import { Metadata } from "next";
 
 interface Props {
@@ -20,7 +19,7 @@ export async function generateMetadata({
 }
 export default function Search({ searchParams }: Props) {
   return (
-    <StyledSearch className="main">
+    <div id="search" className="main">
       <div className="searchTop">
         <div className="searchZone">
           <div className="buttonZone">
@@ -36,6 +35,6 @@ export default function Search({ searchParams }: Props) {
         {/* @ts-expect-error */}
         <SearchResult searchParams={searchParams} />
       </div>
-    </StyledSearch>
+    </div>
   );
 }
