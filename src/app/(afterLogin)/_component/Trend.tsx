@@ -1,3 +1,5 @@
+"use client";
+
 import { Trend } from "@/model/Trend";
 import { StyledTrend } from "./Trend.style";
 

@@ -1,4 +1,4 @@
-export async function getTrends() {
+export const getTrends = async () => {
   const res = await fetch("http://localhost:9090/api/hashtags/trends", {
     next: {
       tags: ["trends"],
@@ -10,4 +10,4 @@ export async function getTrends() {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-}
+};

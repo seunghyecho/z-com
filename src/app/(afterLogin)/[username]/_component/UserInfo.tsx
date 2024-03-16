@@ -272,10 +272,14 @@ export default function UserInfo({ username, session }: UserInfoProps) {
             {followed ? "Following" : "Follow"}
           </button>
         )}
-      </div>
-      <div>
-        <span>{user._count.Followers} Follwers </span>
-        <span> {user._count.Followings} Followings</span>
+        <div className="userCount">
+          <span>
+            <strong>{user._count.Followers}</strong> Follwers
+          </span>
+          <span>
+            <strong> {user._count.Followings} </strong>Followings
+          </span>
+        </div>
       </div>
     </>
   );
