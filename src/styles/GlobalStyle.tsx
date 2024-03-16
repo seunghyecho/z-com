@@ -77,7 +77,7 @@ const GlobalStyle = createGlobalStyle`
 
             img {
                 width: 134px;
-                min-height: 134px;
+                max-height: 134px;
                 background:${(props) => props.theme.colors.blue_0};
                 border-radius: 50%;
             }
@@ -107,6 +107,15 @@ const GlobalStyle = createGlobalStyle`
 
         &:hover {
             background-color: ${(props) => props.theme.colors.black_3};
+        }
+
+        &.followed {
+            background: white;
+            color: black;
+            border: 1px solid grey;
+        }
+        &.followed:hover {
+            background: lightgray;
         }
     }
 
