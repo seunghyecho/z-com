@@ -23,38 +23,39 @@ export default async function AfterLoginLayout({
 
   return (
     <div className="afterLoginLayout container">
-      <header className="leftSectionWrapper">
-        <section className="leftSection">
-          <div className="leftSectionWrapper">
-            <div className="leftSectionFixed">
-              {/* logo */}
-
-              <Link className="logo" href={session?.user ? "/home" : "/"}>
-                <div className="logoPill"></div>
-              </Link>
-
-              {/* Nav Menu */}
-
-              {session?.user && (
-                <nav>
-                  <NavMenu />
-
-                  <div className="postButton">
-                    <Link href="/compose/tweet">
-                      <MdOutlinePostAdd size={20} />
-                      <span>Post</span>
-                    </Link>
-                  </div>
-
-                  <LogoutButton me={session} />
-                </nav>
-              )}
-            </div>
-          </div>
-        </section>
-      </header>
-
+      {/* 로그아웃 버튼 포함 시키도록 RQProvider 감쌈 */}
       <RQProvider>
+        <header className="leftSectionWrapper">
+          <section className="leftSection">
+            <div className="leftSectionWrapper">
+              <div className="leftSectionFixed">
+                {/* logo */}
+
+                <Link className="logo" href={session?.user ? "/home" : "/"}>
+                  <div className="logoPill"></div>
+                </Link>
+
+                {/* Nav Menu */}
+
+                {session?.user && (
+                  <nav>
+                    <NavMenu />
+
+                    <div className="postButton">
+                      <Link href="/compose/tweet">
+                        <MdOutlinePostAdd size={20} />
+                        <span>Post</span>
+                      </Link>
+                    </div>
+
+                    <LogoutButton me={session} />
+                  </nav>
+                )}
+              </div>
+            </div>
+          </section>
+        </header>
+
         <div className="rightSectionWrapper">
           <div className="rightSectionInner">
             {children}

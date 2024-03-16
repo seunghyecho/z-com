@@ -1,7 +1,6 @@
 "use client";
 
 import { MouseEventHandler } from "react";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { RxAvatar } from "react-icons/rx";
@@ -14,10 +13,9 @@ interface UserInfoProps {
   username: string;
   session: Session | null;
 }
-export default function UserInfo({ username }: UserInfoProps) {
+export default function UserInfo({ username, session }: UserInfoProps) {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const { data: session } = useSession();
   const {
     data: user,
     error,
@@ -28,12 +26,6 @@ export default function UserInfo({ username }: UserInfoProps) {
     staleTime: 60 * 1000,
     gcTime: 300 * 1000,
   });
-
-  // const onFollow = () => {
-  //   if (!session?.user) {
-  //     router.replace("/login");
-  //   }
-  // };
 
   const follow = useMutation({
     mutationFn: (userId: string) => {
@@ -54,7 +46,7 @@ export default function UserInfo({ username }: UserInfoProps) {
         console.log("follow", value, userId);
         const index: number = value.findIndex((v) => v.id === userId);
         if (index > -1) {
-          const shallow = [...value];
+          const shallow: User[] = [...value];
           shallow[index] = {
             ...shallow[index],
             Followers: [{ id: session?.user?.email as string }], //추가
@@ -246,6 +238,10 @@ export default function UserInfo({ username }: UserInfoProps) {
   const onFollow: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     e.preventDefault();
+
+    if (!session?.user) {
+      router.replace("/login");
+    }
 
     if (followed) {
       unfollow.mutate(user.id);

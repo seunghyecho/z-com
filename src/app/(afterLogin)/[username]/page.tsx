@@ -3,7 +3,7 @@ import {
   dehydrate,
   HydrationBoundary,
 } from "@tanstack/react-query";
-import { getUser } from "@/app/(afterLogin)/[username]/_lib/getUser";
+import { getUserServer } from "@/app/(afterLogin)/[username]/_lib/getUserServer";
 import { getUserPosts } from "@/app/(afterLogin)/[username]/_lib/getUserPosts";
 import UserPosts from "@/app/(afterLogin)/[username]/_component/UserPosts";
 import UserInfo from "@/app/(afterLogin)/[username]/_component/UserInfo";
@@ -19,7 +19,7 @@ export default async function Profile({ params }: ProfileProps) {
 
   await queryClient.prefetchQuery({
     queryKey: ["users", username],
-    queryFn: getUser,
+    queryFn: getUserServer,
   });
   await queryClient.prefetchInfiniteQuery({
     queryKey: ["posts", "users", username],
