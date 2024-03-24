@@ -1,12 +1,14 @@
 "use client";
 
 import { Post } from "@/model/Post";
+import { useModalStore } from "@/store/modal";
 import {
   InfiniteData,
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { MouseEventHandler, useEffect, useState } from "react";
 import {
   StyledActionButton,
@@ -20,8 +22,10 @@ interface ActionButtonProps {
   post: Post;
 }
 export default function ActionButton({ white, post }: ActionButtonProps) {
+  const router = useRouter();
   const queryClient = useQueryClient();
   const { data: session } = useSession();
+  const modalStore = useModalStore();
 
   const commented: boolean = !!post.Comments?.find(
     (v) => v.userId === session?.user?.email
@@ -282,32 +286,183 @@ export default function ActionButton({ white, post }: ActionButtonProps) {
     onSettled() {},
   });
 
-  const onClickComment: MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.stopPropagation();
-    const formData: FormData = new FormData();
-    formData.append("content", "답글 TEST");
-    fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${post.postId}/comments`,
-      {
-        method: "post",
-        credentials: "include",
-        body: formData,
-      }
-    );
-  };
-  const onClickRepost: MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.stopPropagation();
-    if (!reposted) {
-      const formData: FormData = new FormData();
-      formData.append("content", "재게시 TEST");
-      fetch(
+  /** 재게시 등록*/
+  const repost = useMutation({
+    // optimistic 적용 안하는 경우,
+    mutationFn: () => {
+      return fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${post.postId}/reposts`,
         {
           method: "post",
           credentials: "include",
-          body: formData,
         }
       );
+    },
+    async onSuccess(response) {
+      const data = await response.json();
+      const queryCache = queryClient.getQueryCache();
+      const queryKeys = queryCache.getAll().map((cache) => cache.queryKey); // 쿼리 키 전체 불러
+
+      queryKeys.forEach((queryKey) => {
+        if (queryKey[0] === "posts") {
+          const value: Post | InfiniteData<Post[]> | undefined =
+            queryClient.getQueryData(queryKey);
+          if (value && "pages" in value) {
+            console.log("array :", value);
+
+            const obj = value.pages.flat().find((p) => p.postId === postId); // 찾고자 하는 게시글
+            if (obj) {
+              // 있으면
+              const pageIndex = value.pages.findIndex((page) =>
+                page.includes(obj)
+              );
+              const index = value.pages[pageIndex].findIndex(
+                (p) => p.postId === postId
+              ); // 찾고자 하는 게시글
+
+              const shallow = { ...value };
+              value.pages = { ...value.pages };
+              value.pages[pageIndex] = [...value.pages[pageIndex]];
+
+              shallow.pages[pageIndex][index] = {
+                ...shallow.pages[pageIndex][index],
+                Reposts: [{ userId: session?.user?.email as string }],
+                _count: {
+                  ...shallow.pages[pageIndex][index]._count,
+                  Reposts: shallow.pages[pageIndex][index]._count.Reposts + 1,
+                },
+              };
+              shallow.pages[0].unshift(data); // in infinite scroll
+              queryClient.setQueryData(queryKey, shallow);
+            }
+          } else if (value) {
+            // single post
+            if (value.postId === postId) {
+              const shallow = {
+                ...value,
+                Reposts: [{ userId: session?.user?.email as string }],
+                _count: {
+                  ...value._count,
+                  Reposts: value._count.Reposts + 1,
+                },
+              };
+              queryClient.setQueryData(queryKey, shallow);
+            }
+          }
+        }
+      });
+    },
+  });
+
+  /** 재게시 삭제 */
+  const deleteRepost = useMutation({
+    mutationFn: () => {
+      return fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${post.postId}/reposts`,
+        {
+          method: "delete",
+          credentials: "include",
+        }
+      );
+    },
+    onSuccess() {
+      const queryCache = queryClient.getQueryCache();
+      const queryKeys = queryCache.getAll().map((cache) => cache.queryKey); // 쿼리 키 전체 불러
+
+      queryKeys.forEach((queryKey) => {
+        if (queryKey[0] === "posts") {
+          const value: Post | InfiniteData<Post[]> | undefined =
+            queryClient.getQueryData(queryKey);
+
+          if (value && "pages" in value) {
+            console.log("array :", value);
+
+            const obj = value.pages.flat().find((p) => p.postId === postId); // 찾고자 하는 게시글
+            const repost = value.pages
+              .flat()
+              .find(
+                (v) =>
+                  v.Original?.postId === postId &&
+                  v.User.id === session?.user?.email
+              ); // 재게시한 글이면서 내가 쓴 글 일 경우
+            if (obj) {
+              // 있으면
+              const pageIndex = value.pages.findIndex((page) =>
+                page.includes(obj)
+              );
+              const index = value.pages[pageIndex].findIndex(
+                (p) => p.postId === postId
+              ); // 찾고자 하는 게시글
+
+              const shallow = { ...value };
+              value.pages = { ...value.pages };
+              value.pages[pageIndex] = [...value.pages[pageIndex]];
+
+              shallow.pages[pageIndex][index] = {
+                ...shallow.pages[pageIndex][index],
+                Reposts: shallow.pages[pageIndex][index].Reposts.filter(
+                  (v) => v.userId !== (session?.user?.email as string)
+                ),
+                _count: {
+                  ...shallow.pages[pageIndex][index]._count,
+                  Reposts: shallow.pages[pageIndex][index]._count.Reposts - 1,
+                },
+              };
+              // 재게시 삭제 시, 불변성 지켜주면서
+              shallow.pages = shallow.pages.map((page) => {
+                return page.filter((v) => v.postId !== repost?.postId);
+              });
+              queryClient.setQueryData(queryKey, shallow);
+            }
+          } else if (value) {
+            // single post, 유저 제거
+            if (value.postId === postId) {
+              const shallow = {
+                ...value,
+                Reposts: value.Reposts.filter(
+                  (v) => v.userId !== (session?.user?.email as string)
+                ),
+                _count: {
+                  ...value._count,
+                  Reposts: value._count.Reposts - 1,
+                },
+              };
+              queryClient.setQueryData(queryKey, shallow);
+            }
+          }
+        }
+      });
+    },
+  });
+
+  const onClickComment: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+
+    /** Zustand : 컴포넌트 간 상태 공유
+     *  Url : /compose/tweet
+     */
+
+    modalStore.setMode("comment");
+    modalStore.setData(post);
+    router.push(`/compose/tweet`);
+
+    // const formData: FormData = new FormData();
+    // formData.append("content", "답글 TEST");
+    // fetch(
+    //   `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${post.postId}/comments`,
+    //   {
+    //     method: "post",
+    //     credentials: "include",
+    //     body: formData,
+    //   }
+    // );
+  };
+  const onClickRepost: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+    if (!reposted) {
+      repost.mutate();
+    } else {
+      deleteRepost.mutate();
     }
   };
   const onClickHeart: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -318,8 +473,6 @@ export default function ActionButton({ white, post }: ActionButtonProps) {
       heart.mutate();
     }
   };
-
-  useEffect(() => {}, []);
 
   return (
     <StyledActionButton className="actionButtons">

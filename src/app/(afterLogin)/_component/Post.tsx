@@ -48,26 +48,26 @@ export default function Post({ noImage, post }: PostProps) {
         <div className="postWrapper">
           <div className="postUserSection">
             <Link
-              href={`/${target.User.id}`}
+              href={`/${target?.User?.id}`}
               className="postUserImage"
               onClick={stopPropagation}
             >
-              <img src={target.User.image} alt={target.User.id} />
+              <img src={target?.User?.image} alt={target?.User?.id} />
               <div className="postShade" />
             </Link>
           </div>
           <div className="postBody">
             <div className="postMeta">
-              <Link href={`/${target.User.id}`} onClick={stopPropagation}>
-                <span className="postUserName">{target.User.nickname}</span>
-                <span className="postUserId">@{target.User.id}</span>
+              <Link href={`/${target?.User?.id}`} onClick={stopPropagation}>
+                <span className="postUserName">{target?.User?.nickname}</span>
+                <span className="postUserId">@{target?.User?.id}</span>
                 <span className="postBar"> | </span>
                 <span className="postDate">
                   {dayjs(target.createdAt).fromNow(true)}
                 </span>
               </Link>
             </div>
-            {target.Parent && (
+            {target?.Parent && (
               <Link
                 href={`/${target.Parent.User.id}`}
                 onClick={stopPropagation}

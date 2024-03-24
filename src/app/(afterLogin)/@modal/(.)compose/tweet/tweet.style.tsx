@@ -49,7 +49,13 @@ export const StyledTweetModal = styled.div`
     flex-direction: column;
     flex: 1;
 }
-
+.modalOriginal {
+    padding: 0 16px 20px;
+    margin-top: 54px;
+    margin-bottom: -54px;
+    display: flex;
+    flex-direction: row;
+}
 .modalBody {
     padding: 0 16px;
     flex: 1;

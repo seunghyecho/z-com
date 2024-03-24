@@ -5,8 +5,6 @@ import {
   ChangeEvent,
   ChangeEventHandler,
   FormEvent,
-  FormEventHandler,
-  useEffect,
   useRef,
   useState,
 } from "react";
@@ -14,11 +12,7 @@ import { IoMdImages } from "react-icons/io";
 import TextareaAutosize from "react-textarea-autosize";
 import { Session } from "@auth/core/types";
 import { StyledPostForm } from "./PostForm.style";
-import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type Props = {
   me: Session | null;
@@ -30,7 +24,7 @@ export default function PostForm({ me }: Props): JSX.Element {
   const [preview, setPreview] = useState<
     Array<{ dataUrl: string; file: File } | null>
   >([]);
-  const queryclient = useQueryClient();
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: async (e: FormEvent) => {
@@ -56,8 +50,8 @@ export default function PostForm({ me }: Props): JSX.Element {
       setContent("");
       setPreview([]);
 
-      if (queryclient.getQueryData(["posts", "recommends"])) {
-        queryclient.setQueryData(["posts", "recommends"], (prevData: any) => {
+      if (queryClient.getQueryData(["posts", "recommends"])) {
+        queryClient.setQueryData(["posts", "recommends"], (prevData: any) => {
           // 리액트의 불변성 법칙, 첫 페이지의 첫 게시글로 노출
           const shallow = {
             ...prevData,
@@ -68,8 +62,8 @@ export default function PostForm({ me }: Props): JSX.Element {
           return shallow;
         });
       }
-      if (queryclient.getQueryData(["posts", "followings"])) {
-        queryclient.setQueryData(["posts", "followings"], (prevData: any) => {
+      if (queryClient.getQueryData(["posts", "followings"])) {
+        queryClient.setQueryData(["posts", "followings"], (prevData: any) => {
           const shallow = {
             ...prevData,
             pages: [...prevData.pages],
@@ -84,15 +78,12 @@ export default function PostForm({ me }: Props): JSX.Element {
       console.error(error);
     },
   });
-
   const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setContent(e.target.value);
   };
-
   const onClickUploadButton = () => {
     imageRef.current?.click(); // current가 null 일 경우 ? 예외 처리
   };
-
   const onRemoveFiles = (e: any, index: number) => {
     e.stopPropagation();
     setPreview((prevPreview) => {
@@ -189,7 +180,7 @@ export default function PostForm({ me }: Props): JSX.Element {
               </button>
             </div>
             <button className="actionButton" type="submit" disabled={!content}>
-              Post
+              글쓰기
             </button>
           </div>
         </div>
