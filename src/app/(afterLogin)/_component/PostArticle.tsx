@@ -10,8 +10,13 @@ interface PostArticleProps {
 }
 export default function PostArticle({ children, post }: PostArticleProps) {
   const router = useRouter();
+  let target: Post = post;
+  // 재게시글이 있을경우
+  if (post.Original) {
+    target = post.Original;
+  }
   const onClick = () => {
-    router.push(`${post.User.id}/status/${post.postId}`);
+    router.push(`${target.User.id}/status/${target.postId}`);
   };
   return (
     <article className="postArticle" onClick={onClick}>
