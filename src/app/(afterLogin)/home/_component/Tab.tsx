@@ -17,14 +17,16 @@ export default function Tab() {
   return (
     <StyledTab>
       <div className="homeFixed">
-        <div className="homeText">Home</div>
+        <div className="homeText" hidden>
+          Home
+        </div>
         <div className="homeTab">
           <div onClick={onClickRecommend}>
-            Recommend
+            추천 글
             <div className="tabIndicator" hidden={tab === "following"}></div>
           </div>
           <div onClick={onClickFollowing}>
-            Following
+            팔로잉 글
             <div className="tabIndicator" hidden={tab === "recommend"}></div>
           </div>
         </div>

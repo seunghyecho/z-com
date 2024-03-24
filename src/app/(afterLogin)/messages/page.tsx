@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div id="message" className="main">
       <div className="header">
-        <h3>Message</h3>
+        <h3 hidden>Message</h3>
       </div>
       <Room />
     </div>

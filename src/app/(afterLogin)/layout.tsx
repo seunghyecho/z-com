@@ -44,7 +44,7 @@ export default async function AfterLoginLayout({
                     <div className="postButton">
                       <Link href="/compose/tweet">
                         <MdOutlinePostAdd size={20} />
-                        <span>Post</span>
+                        <span>글쓰기</span>
                       </Link>
                     </div>
 

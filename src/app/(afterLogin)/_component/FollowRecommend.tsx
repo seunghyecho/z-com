@@ -215,11 +215,8 @@ export default function FollowRecommend({ user }: Props) {
           </div>
         </div>
         <div className="followButtonSection">
-          <button
-            className={followed ? "following" : "follow"}
-            onClick={onFollow}
-          >
-            {followed ? "Following" : "Follow"}
+          <button className={followed ? "following" : ""} onClick={onFollow}>
+            {followed ? "팔로잉" : "팔로우"}
           </button>
         </div>
       </Link>

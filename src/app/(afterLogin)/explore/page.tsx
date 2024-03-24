@@ -14,7 +14,7 @@ export default function Home() {
       </div>
 
       <div className="trend">
-        <h3>Trend For You</h3>
+        <h3>트렌드 추천</h3>
         <TrendSection />
       </div>
     </div>

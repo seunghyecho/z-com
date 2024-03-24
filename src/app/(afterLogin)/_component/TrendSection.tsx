@@ -24,7 +24,7 @@ export default function TrendSection() {
     return (
       <StyledTrendSection className="trendBg">
         <div className="trend">
-          <h3>Trend For You</h3>
+          <h3 className="trendForYou"> 트렌드 추천</h3>
           {data?.map((trend, index) => (
             <Trend key={index} trend={trend} />
           ))}
@@ -34,7 +34,7 @@ export default function TrendSection() {
   }
   return (
     <StyledTrendSection className="trendBg">
-      <div className="noTrend">No Trend Data</div>
+      <div className="noTrend">트렌드 추천이 없어요</div>
     </StyledTrendSection>
   );
 }

@@ -26,7 +26,7 @@ export default function NavMenu() {
           <div className="navPill">
             <TbHome size={20} />
             <div style={{ fontWeight: `${segment === "home" ? 600 : 400}` }}>
-              Home
+              홈
             </div>
           </div>
         </Link>
@@ -37,7 +37,7 @@ export default function NavMenu() {
           <div className="navPill">
             <TbMoodSearch size={20} />
             <div style={{ fontWeight: `${segment === "explore" ? 600 : 400}` }}>
-              Explore
+              검색
             </div>
           </div>
         </Link>
@@ -50,7 +50,7 @@ export default function NavMenu() {
             <div
               style={{ fontWeight: `${segment === "messages" ? 600 : 400}` }}
             >
-              Messages
+              메세지
             </div>
           </div>
         </Link>
@@ -65,7 +65,7 @@ export default function NavMenu() {
                 fontWeight: `${segment === me?.user?.email ? 600 : 400}`,
               }}
             >
-              Profile
+              프로필
             </div>
           </div>
         </Link>

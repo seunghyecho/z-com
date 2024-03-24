@@ -274,10 +274,10 @@ export default function UserInfo({ username, session }: UserInfoProps) {
         )}
         <div className="userCount">
           <span>
-            <strong>{user._count.Followers}</strong> Follwers
+            <strong>{user._count.Followers}</strong> 팔로워 수
           </span>
           <span>
-            <strong> {user._count.Followings} </strong>Followings
+            <strong> {user._count.Followings} </strong>팔로잉 수
           </span>
         </div>
       </div>
