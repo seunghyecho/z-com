@@ -18,7 +18,16 @@ interface Props {
   params: { id: string; username: string };
 }
 
-// getSinglePostServer 경우, 서버에서 2번 요청 될 걸, next 에서 알아서 1번 요청 하도록 캐싱 적용
+/**
+ * export const dynamic = 'force-dynamic';
+ * 이 페이지에서 보내는 요청을 캐싱하지 않겠다.
+ * 라이브러리 사용 시.
+ */
+
+/**
+ * getSinglePostServer 경우,
+ * 서버에서 2번 요청 될 걸, next 에서 알아서 1번 요청함.
+ */
 
 export async function generateMetadata({ params }: Props) {
   const user: User = await getUserServer({
