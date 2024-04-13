@@ -18,6 +18,8 @@ interface Props {
   params: { id: string; username: string };
 }
 
+// getSinglePostServer 경우, 서버에서 2번 요청 될 걸, next 에서 알아서 1번 요청 하도록 캐싱 적용
+
 export async function generateMetadata({ params }: Props) {
   const user: User = await getUserServer({
     queryKey: ["users", params.username],

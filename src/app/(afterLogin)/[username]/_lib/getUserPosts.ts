@@ -9,7 +9,7 @@ interface Props {
 export async function getUserPosts({ queryKey, pageParam }: Props) {
   const [_1, _2, username] = queryKey;
   const res = await fetch(
-    `http://localhost:9090/api/users/${username}/posts?cursor=${pageParam}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/${username}/posts?cursor=${pageParam}`,
     {
       next: {
         tags: ["posts", "users", username],

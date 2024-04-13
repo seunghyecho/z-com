@@ -3,7 +3,7 @@ interface Props {
 }
 export async function getPostFollowings({ pageParam }: Props) {
   const res = await fetch(
-    `http://localhost:9090/api/posts/followings?cursor=${pageParam}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/followings?cursor=${pageParam}`,
     {
       next: {
         tags: ["posts", "followings"],
