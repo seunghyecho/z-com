@@ -68,7 +68,7 @@ export const StyledLoginModal = styled.div`
 .input {
     width: 100%;
     border: none;
-    font-size: 17px;
+     
     margin-top: 16px;
     padding: 12px 8px 8px;
     outline: none;
@@ -84,7 +84,7 @@ export const StyledLoginModal = styled.div`
     border-radius: 25px;
     background-color: rgb(15, 20, 25);
     color: white;
-    font-size: 17px;
+     
     cursor: pointer;
     border: none;
 }

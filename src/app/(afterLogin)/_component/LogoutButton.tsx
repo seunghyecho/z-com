@@ -37,7 +37,7 @@ export default function LogoutButton({ me }: LogoutButtonProps) {
   }
 
   return (
-    <StyledLogoutButton className="logoutButton" onClick={onLogout}>
+    <StyledLogoutButton onClick={onLogout}>
       <div className="logoutUserImage">
         <img src={me.user?.image as string} alt={me.user?.email as string} />
       </div>

@@ -19,12 +19,17 @@ color: ${(props) => props.theme.colors.black_2};
     display: flex;
     align-items: center;
     color: rgb(83, 100, 113);
-    margin-left: 24px;
+    margin: 12px 0 6px;
     font-size: 13px;
     line-height: 20px;
-}
-.postReposted svg {
-    fill: rgb(83, 100, 113)
+
+    > * {
+        margin-right: 5px;
+    }
+
+    svg {
+        fill: rgb(83, 100, 113)
+    }
 }
 
 .postUserSection {

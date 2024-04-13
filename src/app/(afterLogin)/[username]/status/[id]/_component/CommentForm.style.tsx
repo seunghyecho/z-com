@@ -38,7 +38,7 @@ textarea {
     width: 100%;
     border: none;
     padding: 12px 0;
-    font-size: 14px;
+     
     line-height: 24px;
     outline: none;
     font-family: Malgun Gothic;

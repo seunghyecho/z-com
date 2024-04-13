@@ -36,7 +36,7 @@ export const StyledBeforeLoginLayout = styled.div`
 }
 .right h3 {
     font-weight: 600;
-    font-size: 17px;
+     
     margin-bottom: 20px;
     margin-top: 40px;
 }

@@ -32,7 +32,7 @@ export default async function Page({ params }: Props) {
   const dehydratedState = dehydrate(queryClient);
 
   return (
-    <div className="container photomodal">
+    <div id="photoModal" className="container">
       <HydrationBoundary state={dehydratedState}>
         <PhotoModalCloseButton />
         <ImageZone id={id} />

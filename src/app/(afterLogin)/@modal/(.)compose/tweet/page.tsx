@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  ChangeEvent,
   ChangeEventHandler,
   FormEvent,
   FormEventHandler,
@@ -97,6 +98,7 @@ export default function TweetModal() {
       alert("업로드 중 에러가 발생했어요.");
     },
     onSettled: () => {
+      modalStore.reset();
       router.back();
     },
   });
@@ -193,6 +195,7 @@ export default function TweetModal() {
   });
 
   const onClickClose = () => {
+    modalStore.reset();
     router.back();
   };
 

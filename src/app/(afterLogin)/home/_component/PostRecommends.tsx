@@ -27,7 +27,7 @@ export default function PostRecommends() {
     queryKey: ["posts", "recommends"],
     queryFn: getPostRecommends,
     initialPageParam: 0,
-    getNextPageParam: (lastPage: IPost[]) => lastPage.at(-1)?.postId,
+    getNextPageParam: (lastPage: IPost[]) => lastPage?.at(-1)?.postId,
     staleTime: 60 * 1000,
     gcTime: 300 * 1000,
   });
@@ -47,8 +47,8 @@ export default function PostRecommends() {
     <>
       {data?.pages.map((page: IPost[], i: number) => (
         <React.Fragment key={i}>
-          {page.map((post: IPost) => (
-            <Post key={post.postId} post={post} />
+          {page.map((post: IPost, i: number) => (
+            <Post key={i} post={post} />
           ))}
         </React.Fragment>
       ))}

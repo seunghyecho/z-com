@@ -22,52 +22,54 @@ export default async function AfterLoginLayout({
   const session = await auth(); //authjs.session-token
 
   return (
-    <div className="afterLoginLayout container">
-      {/* 로그아웃 버튼 포함 시키도록 RQProvider 감쌈 */}
-      <RQProvider>
-        <header className="leftSectionWrapper">
-          <section className="leftSection">
-            <div className="leftSectionWrapper">
-              <div className="leftSectionFixed">
-                {/* logo */}
+    <>
+      <div id="afterLoginLayout" className="container">
+        {/* 로그아웃 버튼 포함 시키도록 RQProvider 감쌈 */}
+        <RQProvider>
+          <header className="leftSectionWrapper">
+            <section className="leftSection">
+              <div className="leftSectionWrapper">
+                <div className="leftSectionFixed">
+                  {/* logo */}
 
-                <Link className="logo" href={session?.user ? "/home" : "/"}>
-                  <div className="logoPill"></div>
-                </Link>
+                  <Link className="logo" href={session?.user ? "/home" : "/"}>
+                    <div className="logoPill"></div>
+                  </Link>
 
-                {/* Nav Menu */}
+                  {/* Nav Menu */}
 
-                {session?.user && (
-                  <nav>
-                    <NavMenu />
+                  {session?.user && (
+                    <nav>
+                      <NavMenu />
 
-                    <div className="postButton">
-                      <Link href="/compose/tweet">
-                        <MdOutlinePostAdd size={20} />
-                        <span>글쓰기</span>
-                      </Link>
-                    </div>
+                      <div className="postButton">
+                        <Link href="/compose/tweet">
+                          <MdOutlinePostAdd size={20} />
+                          <span>글쓰기</span>
+                        </Link>
+                      </div>
 
-                    <LogoutButton me={session} />
-                  </nav>
-                )}
+                      <LogoutButton me={session} />
+                    </nav>
+                  )}
+                </div>
               </div>
-            </div>
-          </section>
-        </header>
-
-        <div className="rightSectionWrapper">
-          <div className="rightSectionInner">
-            {children}
-            <section className="rightSection">
-              <RightSearchZone />
-              <TrendSection />
-              <FollowRecommentSection />
             </section>
+          </header>
+
+          <div className="rightSectionWrapper">
+            <div className="rightSectionInner">
+              {children}
+              <section className="rightSection">
+                <RightSearchZone />
+                <TrendSection />
+                <FollowRecommentSection />
+              </section>
+            </div>
           </div>
-        </div>
-        {modal}
-      </RQProvider>
-    </div>
+          {modal}
+        </RQProvider>
+      </div>
+    </>
   );
 }
