@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/auth"; // server
 import Main from "@/app/(beforeLogin)/_component/Main";
+import RedirectToLogin from "@/app/(beforeLogin)/login/_component/RedirectToLogin";
 
 export default async function Login() {
   const session = await auth();
@@ -10,5 +11,10 @@ export default async function Login() {
     return null;
   }
 
-  return <Main />;
+  return (
+    <>
+      <RedirectToLogin />
+      <Main />
+    </>
+  );
 }
