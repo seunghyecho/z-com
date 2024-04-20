@@ -11,8 +11,8 @@ import { getComments } from "@/app/(afterLogin)/[username]/status/[id]/_lib/getC
 import { getSinglePost } from "@/app/(afterLogin)/[username]/status/[id]/_lib/getSinglePost";
 import { User } from "@/model/User";
 import { Post } from "@/model/Post";
-import { getUserServer } from "../../_lib/getUserServer";
-import { getSinglePostServer } from "./_lib/getSinglePostServer";
+import { getUserServer } from "@/app/(afterLogin)/[username]/_lib/getUserServer";
+import { getSinglePostServer } from "@/app/(afterLogin)/[username]/status/[id]/_lib/getSinglePostServer";
 
 interface Props {
   params: { id: string; username: string };
@@ -66,7 +66,7 @@ export default async function Page({ params }: Props) {
         <CommentForm id={id} />
 
         <div>
-          {/* @ts-expect-error */}
+          {/* @ts-ignore  */}
           <Comments id={id} />
         </div>
       </HydrationBoundary>

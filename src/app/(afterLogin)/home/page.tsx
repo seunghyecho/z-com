@@ -3,12 +3,12 @@ import TabProvider from "@/app/(afterLogin)/home/_component/TabProvider";
 import PostForm from "@/app/(afterLogin)/home/_component/PostForm";
 import TabDeciderSuspense from "@/app/(afterLogin)/home/_component/TabDeciderSuspense";
 import { auth } from "@/auth";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Home / Z",
-  description: "Home",
-};
+// export const metadata: Metadata = {
+//   title: "Home / Z",
+//   description: "Home",
+// };
 
 /**
  * 메인 (홈)
@@ -24,7 +24,7 @@ export default async function Home() {
       <TabProvider>
         <Tab />
         <PostForm me={session} />
-        {/* @ts-expect-error */}
+        {/* @ts-ignore  */}
         <TabDeciderSuspense />
       </TabProvider>
     </main>

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { IoMdImage } from "react-icons/io";
 import { ChangeEventHandler, FormEventHandler, useRef, useState } from "react";

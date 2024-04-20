@@ -32,7 +32,7 @@ export default function Search({ searchParams }: Props) {
         <Tab />
       </div>
       <div className="list">
-        {/* @ts-expect-error */}
+        {/* @ts-ignore  */}
         <SearchResult searchParams={searchParams} />
       </div>
     </div>

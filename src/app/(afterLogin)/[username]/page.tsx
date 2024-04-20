@@ -43,7 +43,7 @@ export default async function Profile({ params }: Props) {
     <div className="main">
       <HydrationBoundary state={dehydratedState}>
         <UserInfo username={username} session={session} />
-        {/* @ts-expect-error */}
+        {/* @ts-ignore */}
         <UserPosts username={username} />
       </HydrationBoundary>
     </div>
