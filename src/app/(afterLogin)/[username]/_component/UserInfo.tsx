@@ -8,6 +8,7 @@ import BackButton from "@/app/(afterLogin)/_component/BackButton";
 import { getUser } from "@/app/(afterLogin)/[username]/_lib/getUser";
 import { Session } from "@auth/core/types";
 import { User } from "@/model/User";
+import { PiEnvelopeSimpleDuotone } from "react-icons/pi";
 
 interface UserInfoProps {
   username: string;
@@ -250,13 +251,20 @@ export default function UserInfo({ username, session }: UserInfoProps) {
     }
   };
 
+  const onMessage = () => {
+    // url 형식 : /messages/내아이디-상대방아이디
+    const ids = [session?.user?.email, user.id];
+    ids.sort();
+    router.push(`/messages/${ids.join("-")}`);
+  };
+
   return (
     <>
       <div className="header">
         <BackButton />
         <h3 className="headerTitle">{user.nickname}</h3>
       </div>
-      <div className="userZone">
+      <div className="userZone" id="userZone">
         <div className="userImage">
           <img src={user.image} alt={user.id} />
         </div>
@@ -265,12 +273,17 @@ export default function UserInfo({ username, session }: UserInfoProps) {
           <div>@{user.id}</div>
         </div>
         {session?.user?.email !== user.id && (
-          <button
-            className={`followButton ${followed && "followed"}`}
-            onClick={onFollow}
-          >
-            {followed ? "Following" : "Follow"}
-          </button>
+          <>
+            <button className="messageButton" onClick={onMessage}>
+              <PiEnvelopeSimpleDuotone size={20} />
+            </button>
+            <button
+              className={`followButton ${followed && "followed"}`}
+              onClick={onFollow}
+            >
+              {followed ? "Following" : "Follow"}
+            </button>
+          </>
         )}
         <div className="userCount">
           <span>

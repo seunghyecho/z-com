@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props) {
       description: `${user.nickname} (${user.id}) Profile`,
       images: [
         {
-          url: `http://z.nodebird.com${user.image}`, // /upload
+          url: `http://z.nodebird.com${user.image}`, // /upload, TODO, 배포 url로 수정하기
           width: 400,
           height: 400,
         },
@@ -54,7 +54,6 @@ export default async function Profile({ params }: Props) {
     <div className="main">
       <HydrationBoundary state={dehydratedState}>
         <UserInfo username={username} session={session} />
-        {/* @ts-ignore */}
         <UserPosts username={username} />
       </HydrationBoundary>
     </div>

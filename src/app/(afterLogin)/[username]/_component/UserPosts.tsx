@@ -60,5 +60,7 @@ export default function UserPosts({ username }: UserPostsProps) {
         <div ref={ref} style={{ height: 50 }} />
       </>
     );
+  } else {
+    return <></>;
   }
 }

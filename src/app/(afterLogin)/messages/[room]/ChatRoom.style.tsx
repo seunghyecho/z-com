@@ -79,4 +79,8 @@ export const StyledChatRoom = styled.div`
     color: #536471;
     font-size: 13px;
 }
+.list{
+    flex:1;
+    padding: 0 16px;
+}
 `;

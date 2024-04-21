@@ -45,13 +45,13 @@ export async function generateMetadata({ params }: Props) {
       images:
         post.Images.length > 0
           ? post.Images?.map((v) => ({
-              url: `http://z.nodebird.com${v.link}`, // /upload
+              url: `http://z.nodebird.com${v.link}`, // /upload, TODO, 배포 url로 수정하기
               width: 600,
               height: 400,
             }))
           : [
               {
-                url: `http://z.nodebird.com${user.image}`, // /upload
+                url: `http://z.nodebird.com${user.image}`, // /upload, TODO, 배포 url로 수정하기
                 width: 400,
                 height: 400,
               },

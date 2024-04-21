@@ -1,23 +1,30 @@
-"use client";
-
-import { faker } from "@faker-js/faker";
-import Link from "next/link";
-import BackButton from "../../_component/BackButton";
-
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko"; // 한국어 가져오기
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
-import { StyledChatRoom } from "./ChatRoom.style";
 
-export default function ChatRoom() {
-  const user = {
-    id: "id222",
-    nickname: "nickname222",
-    image: faker.image.avatar(),
-  };
+import { QueryClient } from "@tanstack/react-query";
+import { MessageForm } from "@/app/(afterLogin)/messages/[room]/_component/MessageForm";
+import { getUserServer } from "@/app/(afterLogin)/[username]/_lib/getUserServer";
+import { UserInfo } from "@/app/(afterLogin)/messages/[room]/_component/UserInfo";
+import { auth } from "@/auth";
+
+interface ChatRoomProps {
+  params: { room: string };
+}
+
+export default async function ChatRoom({ params }: ChatRoomProps) {
+  const session = await auth();
+  const queryClient = new QueryClient();
+
+  const ids = params.room.split("-").filter((f) => f !== session?.user?.email);
+  if (!ids[0]) return null;
+  await queryClient.prefetchQuery({
+    queryKey: ["users", ids[0]],
+    queryFn: getUserServer,
+  });
 
   const messages = [
     {
@@ -33,21 +40,10 @@ export default function ChatRoom() {
       createdAt: new Date(),
     },
   ];
+
   return (
-    <StyledChatRoom>
-      <div className="header">
-        <BackButton />
-        <div>
-          <h2>{user.nickname}</h2>
-        </div>
-      </div>
-      <Link href={user.nickname} className="userInfo">
-        <img src={user.image} alt="" />
-        <div>
-          <b>{user.nickname}</b>
-        </div>
-        <div>@{user.id}</div>
-      </Link>
+    <div id="chatroom" className="main">
+      <UserInfo id={ids[0]} />
       <div className="list">
         {messages.map((m) => {
           if (m.id === "shcho") {
@@ -71,6 +67,7 @@ export default function ChatRoom() {
           );
         })}
       </div>
-    </StyledChatRoom>
+      <MessageForm />
+    </div>
   );
 }

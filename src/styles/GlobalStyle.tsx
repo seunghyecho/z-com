@@ -4,6 +4,84 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
     ${reset}
 
+    #chatroom{
+        &.main {
+            height: 100dvh;
+            border-color: rgb(239, 243, 244);
+            border-right-width: 1px;
+            border-left-width: 1px;
+            border-left-style: solid;
+            border-right-style: solid;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        @media all and (min-width: 687px) {
+            &.main {
+                width: 600px;
+            }
+        }
+       
+        .message {
+            padding-bottom: 24px;
+        }
+        .content {
+            line-height: 20px;
+            padding: 12px 16px;
+            font-size: 15px;
+        }
+        .myMessage {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .myMessage .content {
+            background-color: #0083eb;
+            border-top-left-radius: 22px;
+            border-top-right-radius: 22px;
+            border-bottom-left-radius: 22px;
+            color: white;
+        }
+        .yourMessage {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .yourMessage .content {
+            background-color: #eff3f4;
+            border-top-left-radius: 22px;
+            border-top-right-radius: 22px;
+            border-bottom-right-radius: 22px;
+            color: black;
+        }
+        .date {
+            margin-top: 8px;
+            color: #536471;
+            font-size: 13px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .main {
+                border-color: rgb(47, 51, 54);
+            }
+            .userInfo {
+                border-color: rgb(47, 51, 54);
+            }
+            .yourMessage .content {
+                background: rgb(47, 51, 54);
+                color: white;
+            }
+            .date {
+                color: rgb(113, 118, 123);
+            }
+        }
+        .list {
+            flex: 1;
+            padding: 0 16px;
+            overflow-y: scroll;
+        }
+
+    }
+
     #search{
         .searchTop {
             padding-top: 24px;
@@ -118,7 +196,7 @@ const GlobalStyle = createGlobalStyle`
         color: ${(props) => props.theme.colors.black_0};
     }
 
-    .userZone {
+    #userZone {
         position: relative;
         padding: 12px 16px 30px;
         display: flex;
@@ -128,8 +206,6 @@ const GlobalStyle = createGlobalStyle`
         .userCount{
             position: absolute;
             bottom: 5px;
-             
-            
             strong{
                 font-weight: 600;
             }
@@ -140,7 +216,6 @@ const GlobalStyle = createGlobalStyle`
             align-items: center;
             margin-right: 12px;
             border-radius: 50%;
-
             img {
                 width: 134px;
                 max-height: 134px;
@@ -151,39 +226,54 @@ const GlobalStyle = createGlobalStyle`
         .userName {
             margin: 0 12px;
             flex: 1;
-
             h2 {
                 font-weight: bold;
                 font-size: 20px;
             }
         }
-    }
-
-    .followButton {
-        padding: 12px 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: ${(props) => props.theme.colors.white_0};
-        background-color: ${(props) => props.theme.colors.black_2};
-        transition: background-color .2s;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-
-        &:hover {
-            background-color: ${(props) => props.theme.colors.black_3};
+        .messageButton {
+            border: 1px solid rgb(207, 217, 222);
+            width: 34px;
+            border-radius: 17px;
+            height: 34px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            cursor: pointer;
+            margin-right: 8px;
         }
+        .messageButton:hover {
+            background-color: rgb(15, 20, 25, 0.09);
+        }
+        .followButton {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: ${(props) => props.theme.colors.white_0};
+            background-color: ${(props) => props.theme.colors.black_2};
+            transition: background-color .2s;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
 
-        &.followed {
-            background: white;
-            color: black;
-            border: 1px solid grey;
+            &:hover {
+                background-color: ${(props) => props.theme.colors.black_3};
+            }
+
+            &.followed {
+                background: white;
+                color: black;
+                border: 1px solid grey;
+            }
+            &.followed:hover {
+                background: lightgray;
+            }
         }
-        &.followed:hover {
-            background: lightgray;
-        }
-    }
+    }   
+
 
     @keyframes rotating {
         from{
