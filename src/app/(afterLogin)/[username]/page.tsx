@@ -20,6 +20,17 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `${user.nickname} (${user.id}) / Z`,
     description: `${user.nickname} (${user.id}) Profile`,
+    openGraph: {
+      title: `${user.nickname} (${user.id}) / Z`,
+      description: `${user.nickname} (${user.id}) Profile`,
+      images: [
+        {
+          url: `http://z.nodebird.com${user.image}`, // /upload
+          width: 400,
+          height: 400,
+        },
+      ],
+    },
   };
 }
 export default async function Profile({ params }: Props) {

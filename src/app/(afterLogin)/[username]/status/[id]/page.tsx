@@ -39,6 +39,24 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `${user.nickname} : ${post.content}`,
     description: post.content,
+    openGraph: {
+      title: `${user.nickname} : ${post.content}`,
+      description: post.content,
+      images:
+        post.Images.length > 0
+          ? post.Images?.map((v) => ({
+              url: `http://z.nodebird.com${v.link}`, // /upload
+              width: 600,
+              height: 400,
+            }))
+          : [
+              {
+                url: `http://z.nodebird.com${user.image}`, // /upload
+                width: 400,
+                height: 400,
+              },
+            ],
+    },
   };
 }
 export default async function Page({ params }: Props) {
