@@ -23,7 +23,7 @@ export const UserInfo = ({ id }: UserInfoProps) => {
           <h2>{user.nickname}</h2>
         </div>
       </div>
-      <Link href={user.image} className="userInfo">
+      <Link href={"/" + user.id} className="userInfo">
         <img src={user.image} alt="" />
         <div>
           <b>{user.nickname}</b>

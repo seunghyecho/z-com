@@ -422,7 +422,7 @@ const GlobalStyle = createGlobalStyle`
 
         .main {
         width: 600px;
-        height: 200dvh;
+        height: 100dvh;
         }
         .followRecommend {
         margin: 12px 0;
