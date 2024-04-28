@@ -9,6 +9,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { MessageForm } from "@/app/(afterLogin)/messages/[room]/_component/MessageForm";
 import { getUserServer } from "@/app/(afterLogin)/[username]/_lib/getUserServer";
 import { UserInfo } from "@/app/(afterLogin)/messages/[room]/_component/UserInfo";
+import WebsocketComponent from "@/app/(afterLogin)/messages/[room]/_component/WebsocketComponent";
 import { auth } from "@/auth";
 
 interface ChatRoomProps {
@@ -43,6 +44,7 @@ export default async function ChatRoom({ params }: ChatRoomProps) {
 
   return (
     <div id="chatroom" className="main">
+      <WebsocketComponent />
       <UserInfo id={ids[0]} />
       <div className="list">
         {messages.map((m) => {
@@ -67,7 +69,7 @@ export default async function ChatRoom({ params }: ChatRoomProps) {
           );
         })}
       </div>
-      <MessageForm />
+      <MessageForm id={ids[0]} />
     </div>
   );
 }
