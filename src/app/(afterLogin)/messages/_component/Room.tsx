@@ -2,6 +2,7 @@
 
 import { StyledRoom } from "./Room.style";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { Room } from "@/model/Room";
 
 import dayjs from "dayjs";
@@ -16,19 +17,23 @@ interface RoomProps {
 }
 export default function Room({ room }: RoomProps) {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const onClick = () => {
     router.push(`/messages/${room.room}`);
   };
+
+  const user =
+    room.Receiver.id === session?.user?.email ? room.Sender : room.Receiver;
   return (
     <StyledRoom className="room" onClickCapture={onClick}>
       <div className="roomUserImage">
-        <img src={room.Receiver.image} alt="" />
+        <img src={user.image} alt="" />
       </div>
       <div className="roomChatInfo">
         <div className="roomUserInfo">
-          <b>{room.Receiver.nickname}</b>
-          <span>@{room.Receiver.id}</span>
+          <b>{user.nickname}</b>
+          <span>@{user.id}</span>
           <span className="postDate">
             {/* 방의 가장 마지막 메세지 날짜 */}
             {dayjs(room.createdAt).fromNow(true)}

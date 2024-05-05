@@ -13,6 +13,7 @@ import { StyledMessageForm } from "./MessageForm.style";
 import { useSession } from "next-auth/react";
 import { InfiniteData, useQueryClient } from "@tanstack/react-query";
 import { Message } from "@/model/Message";
+import { useMessageStore } from "@/store/message";
 
 interface MessageFormProps {
   id: string;
@@ -20,6 +21,8 @@ interface MessageFormProps {
 export const MessageForm = ({ id }: MessageFormProps) => {
   const [content, setContent] = useState("");
   const [socket] = useSocket();
+  const setGoDown = useMessageStore().setGoDown;
+
   const { data: session } = useSession();
   const queryClient = useQueryClient();
 
@@ -40,7 +43,7 @@ export const MessageForm = ({ id }: MessageFormProps) => {
       receiverId: id,
       content,
     });
-    // TODO react 쿼리 데이터에 추가
+    // react 쿼리 데이터에 추가
     const oldMessages = queryClient.getQueryData([
       "rooms",
       { senderId: session?.user?.email, receiverId: id },
@@ -76,21 +79,13 @@ export const MessageForm = ({ id }: MessageFormProps) => {
         ],
         newMessages
       );
+      setGoDown(true); // 새메세지 등록할때마다 내려가도록 설정.
     }
 
     // invalidate query 할 경우, 바로 업데이트
 
     setContent("");
   };
-
-  useEffect(() => {
-    socket?.on("receiveMessage", (data) => {
-      console.log("receiveMessage", data);
-    });
-    return () => {
-      socket?.off("receiveMessage");
-    };
-  }, [socket]);
 
   return (
     <StyledMessageForm className="formZone">
