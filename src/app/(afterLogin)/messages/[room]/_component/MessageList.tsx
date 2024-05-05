@@ -34,7 +34,9 @@ export default function MessageList({ id }: MessageListProps) {
 
   const listRef = useRef<HTMLDivElement>(null);
   const [pageRendered, setPageRendered] = useState(false);
+  const [adjustingScroll, setAdjustingScroll] = useState(false);
 
+  // TODO reverse infinite scroll
   const {
     data: messages,
     isFetching,
@@ -55,7 +57,7 @@ export default function MessageList({ id }: MessageListProps) {
     queryFn: getMessages,
     initialPageParam: 0,
     getPreviousPageParam: (firstPage) => firstPage.at(0)?.messageId,
-    getNextPageParam: (lastPage) => lastPage.at(-1)?.messageId,
+    getNextPageParam: (lastPage) => lastPage.at(-1)?.messageId, //쓰진 않지만 필수인듯
     enabled: !!(session?.user?.email && id),
   });
 
@@ -65,10 +67,23 @@ export default function MessageList({ id }: MessageListProps) {
   });
 
   useEffect(() => {
+    if (!listRef.current) return;
+
     if (inView) {
-      !isFetching && hasPreviousPage && fetchPreviousPage();
+      if (!isFetching && hasPreviousPage && !adjustingScroll) {
+        const prevHeight = listRef.current?.scrollHeight;
+        fetchPreviousPage().then(() => {
+          setAdjustingScroll(true);
+          setTimeout(() => {
+            if (!listRef.current) return;
+            listRef.current.scrollTop =
+              listRef.current.scrollHeight - prevHeight;
+            setAdjustingScroll(false);
+          }, 1);
+        });
+      }
     }
-  }, [inView, isFetching, hasPreviousPage, fetchPreviousPage]);
+  }, [inView, isFetching, hasPreviousPage, fetchPreviousPage, adjustingScroll]);
 
   // 새로 로드 되면 맨 위로?
   let hasMessages = !!messages;
@@ -134,8 +149,8 @@ export default function MessageList({ id }: MessageListProps) {
 
   return (
     <div className="list" ref={listRef}>
-      {pageRendered && (
-        <div ref={ref} style={{ height: 10 }}>
+      {!adjustingScroll && pageRendered && (
+        <div ref={ref} style={{ height: 1 }}>
           돔을 인지하나?
         </div>
       )}

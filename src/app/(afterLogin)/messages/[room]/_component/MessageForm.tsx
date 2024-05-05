@@ -32,17 +32,18 @@ export const MessageForm = ({ id }: MessageFormProps) => {
 
   const onSubmit = () => {
     // socket.io 연결
-    // sendMessage 는 서버와의 약속
     if (!session?.user?.email) return;
 
     const ids = [session.user.email, id];
     ids.sort();
 
+    // sendMessage 는 서버와의 약속
     socket?.emit("sendMessage", {
       senderId: session?.user?.email,
       receiverId: id,
       content,
     });
+
     // react 쿼리 데이터에 추가
     const oldMessages = queryClient.getQueryData([
       "rooms",
@@ -50,14 +51,14 @@ export const MessageForm = ({ id }: MessageFormProps) => {
       "messages",
     ]) as InfiniteData<Message[]>;
 
-    // 메세지 추가 시 가장 마지막에 추가하도록 설정
-
+    // 타입 체크를 위한 조건문
     if (oldMessages && typeof oldMessages === "object") {
       const newMessages = {
         ...oldMessages,
         pages: [...oldMessages.pages],
       };
 
+      // 메세지를 가장 마지막에 추가
       const lastPage = newMessages.pages.at(-1);
       const newLastPage = lastPage ? [...lastPage] : [];
       let lastMessageId = lastPage?.at(-1)?.messageId;
@@ -79,11 +80,11 @@ export const MessageForm = ({ id }: MessageFormProps) => {
         ],
         newMessages
       );
-      setGoDown(true); // 새메세지 등록할때마다 내려가도록 설정.
+      // 새메세지 등록할때마다 내려가도록 설정.
+      setGoDown(true);
     }
 
-    // invalidate query 할 경우, 바로 업데이트
-
+    // (선택)invalidate query 할 경우, 바로 업데이트 할 수도 있음
     setContent("");
   };
 
