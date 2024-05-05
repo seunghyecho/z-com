@@ -5,9 +5,9 @@ npm run dev
 
 ```
 
-- Open [http://localhost:3000]
+- Open [http://localhost:3000](http://localhost:3000)
 
-## Also Getting Started NEST-PRISMA_MAIN
+## Also Getting Started NEST-PRISMA-MAIN
 
 ```bash
 npx prisma migrate dev
