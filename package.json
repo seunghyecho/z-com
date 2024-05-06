@@ -5,11 +5,11 @@
  "private": true,
  "scripts": {
   "dev": "next dev",
-  "build": "next build",
+  "build": "next build && next export",
   "start": "next start",
   "lint": "next lint",
   "mock": "npx tsx watch ./src/mocks/http.ts",
-  "deploy": "next build && touch out/.nojekyll && git add -f out/ && git commit -m 'deploy to gh-pages' && git subtree push --prefix out origin gh-pages"
+  "deploy": "gh-pages -d build"
  },
  "dependencies": {
   "@auth/core": "^0.18.6",
