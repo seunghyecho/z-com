@@ -18,15 +18,15 @@ import { auth } from "@/auth";
  */
 
 export default async function Home() {
-  const session = await auth();
-  return (
-    <main className="main">
-      <TabProvider>
-        <Tab />
-        <PostForm me={session} />
-        {/* @ts-ignore  */}
-        <TabDeciderSuspense />
-      </TabProvider>
-    </main>
-  );
+ const session = await auth();
+ return (
+  <main className="main">
+   <TabProvider>
+    <Tab />
+    <PostForm me={session} />
+    {/* @ts-ignore  */}
+    <TabDeciderSuspense />
+   </TabProvider>
+  </main>
+ );
 }

@@ -24,8 +24,6 @@ export const StyledCommentForm = styled.div`
   border-radius: 20px;
  }
 
- .postForm {
- }
  .postInputSection {
   flex: 1;
  }

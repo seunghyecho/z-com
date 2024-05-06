@@ -4,20 +4,19 @@ import { Trend } from "@/model/Trend";
 import { StyledTrend } from "./Trend.style";
 
 interface TrendProps {
-  trend: Trend;
+ trend: Trend;
 }
 export default function Trend({ trend }: TrendProps) {
-  // 주소창 특수문자 변환 필요 :encodeURIComponent
-  return (
-    <StyledTrend
-      href={`/search?q=${encodeURIComponent(trend.title)}`}
-      className="container"
-    >
-      <div className="count">{trend.post}</div>
-      <div className="title">{trend.title}</div>
-      <div className="posts">
-        {trend.count.toLocaleString()} <span>posts</span>
-      </div>
-    </StyledTrend>
-  );
+ // 주소창 특수문자 변환 필요 :encodeURIComponent
+ return (
+  <StyledTrend
+   href={`/search?q=${encodeURIComponent(trend.title)}`}
+   className="container"
+  >
+   <div className="title">{trend.title}</div>
+   <div className="posts">
+    <span>{trend.count.toLocaleString()} posts</span>
+   </div>
+  </StyledTrend>
+ );
 }

@@ -1,19 +1,18 @@
 import styled from "styled-components";
 
 export const StyledFollowRecommend = styled.div`
- margin: 12px 0;
  width: 100%;
 
- h3 {
-  margin: 30px 0;
-  font-weight: 600;
- }
-
  .container {
-  padding: 7px 0;
+  padding: 5px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &:hover {
+   background-color: ${(props) => props.theme.colors.white_1};
+   cursor: pointer;
+  }
  }
 
  .userLogoSection {
@@ -37,6 +36,7 @@ export const StyledFollowRecommend = styled.div`
  .followButtonSection {
   button {
    font-size: 12px;
+   font-weight: 800;
    padding: 10px;
    width: 100%;
    min-width: 80px;

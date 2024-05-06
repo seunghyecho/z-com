@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const StyledRightSearchZone = styled.div`
+ height: 42px;
  .search {
-  position: fixed;
+  /* position: fixed; */
   height: 42px;
   width: inherit;
   border-radius: 8px;
@@ -26,7 +27,9 @@ export const StyledRightSearchZone = styled.div`
   margin-left: 5px;
   font-size: 15px;
  }
+`;
 
+export const StyledRightSearchFilterZone = styled.div`
  /* filter */
  .filterTitle {
   margin-top: 12px;
@@ -35,7 +38,7 @@ export const StyledRightSearchZone = styled.div`
   border-radius: 8px;
   border: 1px solid rgb(239, 243, 244);
   color: rgba(15, 20, 25, 1);
-  font-weight: bold;
+  font-weight: 800;
  }
 
  .filterSection {
@@ -45,6 +48,10 @@ export const StyledRightSearchZone = styled.div`
 
   > div {
    margin-bottom: 32px;
+
+   &:last-child {
+    margin: 0;
+   }
   }
 
   .filterLabel {
@@ -55,11 +62,11 @@ export const StyledRightSearchZone = styled.div`
   }
 
   .radio {
-   margin: 16px 0;
+   margin: 10px 0;
    display: flex;
    justify-content: space-between;
-
    background-image: url(CheckedFocus);
+   font-size: 13px;
 
    input[type="radio"] {
     appearance: none;
