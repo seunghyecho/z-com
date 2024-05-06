@@ -1,92 +1,90 @@
 import styled from "styled-components";
 
 export const StyledCommentForm = styled.div`
-display: flex;
-padding: 16px 16px 8px;
-border-color: rgb(239, 243, 244);
-border-bottom-width: 1px;
-border-bottom-style: solid;
+ display: flex;
+ padding: 16px 16px 8px;
+ border-color: rgb(239, 243, 244);
+ border-bottom-width: 1px;
+ border-bottom-style: solid;
 
-.postUserSection {
-    margin-right: 12px;
-    width: 40px;
-}
+ .postUserSection {
+  margin-right: 12px;
+  width: 40px;
+ }
 
-.postUserImage {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-}
+ .postUserImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+ }
 
-.postUserImage img {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-}
+ .postUserImage img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+ }
 
-.postForm {
-   
-}
-.postInputSection {
-    flex: 1;
-}
-.postButtonSection {
-    width: 100%;
-}
+ .postForm {
+ }
+ .postInputSection {
+  flex: 1;
+ }
+ .postButtonSection {
+  width: 100%;
+ }
 
-textarea {
-    width: 100%;
-    border: none;
-    padding: 12px 0;
-     
-    line-height: 24px;
-    outline: none;
-    font-family: Malgun Gothic;
-    background: none;
-}
+ textarea {
+  width: 100%;
+  border: none;
+  padding: 12px 0;
 
-textarea::placeholder {
-    font-family: Malgun Gothic;
-}
-.footerButtons {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.footerButtonLeft {
-    flex: 1;
-}
-.uploadButton {
-    width: 34px;
-    height: 34px;
-    border: none;
-    cursor: pointer;
-    border-radius: 17px;
-    transition-duration: 0.2s;
-    transition-property: background-color;
-    /* background-color: rgb(29, 155, 240, 0.01); */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.uploadButton:hover {
-    background-color: rgb(29, 155, 240, 0.1);
-}
-.uploadButton svg {
-    fill: rgb(29, 155, 240);
-}
-.actionButton:disabled {
-    opacity: 0.5;
-}
-.actionButton {
-    width: 94px;
-    height: 36px;
-    border: none;
-    color: rgb(255, 255, 255);
-    font-weight: 400;
-    font-size: 13px;
-    border-radius: 8px;
-    background: ${(props) => props.theme.colors.blue_0};
-}
+  line-height: 24px;
+  outline: none;
+  font-family: Malgun Gothic;
+  background: none;
+ }
 
+ textarea::placeholder {
+  font-family: Malgun Gothic;
+ }
+ .footerButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+ }
+ .footerButtonLeft {
+  flex: 1;
+ }
+ .uploadButton {
+  width: 34px;
+  height: 34px;
+  border: none;
+  cursor: pointer;
+  border-radius: 17px;
+  transition-duration: 0.2s;
+  transition-property: background-color;
+  /* background-color: rgb(29, 155, 240, 0.01); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+ .uploadButton:hover {
+  background-color: rgb(29, 155, 240, 0.1);
+ }
+ .uploadButton svg {
+  fill: rgb(29, 155, 240);
+ }
+ .actionButton:disabled {
+  opacity: 0.5;
+ }
+ .actionButton {
+  width: 94px;
+  height: 36px;
+  border: none;
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-size: 13px;
+  border-radius: 8px;
+  background: ${(props) => props.theme.colors.blue_0};
+ }
 `;
